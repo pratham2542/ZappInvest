@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler'; 
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Stack1 from  "./navigation/navigator";
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+SplashScreen.preventAutoHideAsync()
+  .then(result => console.log(`succeeded: ${result}`))
+  .catch(console.warn);
 
 export default function App() {
+   //timout starts after preventAutoAsync
+   //change color and image of splash screen in app.json
+   useEffect(()=>{
+     setTimeout(async () => {
+       await SplashScreen.hideAsync();
+     }, 2000);
+   },[])
+   
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.container}>
+        <NavigationContainer>
+          <Stack1 />
+        </NavigationContainer>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor:"white"
   },
 });
