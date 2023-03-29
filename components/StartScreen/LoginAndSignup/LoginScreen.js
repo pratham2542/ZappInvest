@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import colors from "../../../config/colors";
 import AppButton from "../../Cards/AppButton";
 import GoogleCard from "../../Cards/GoogleCard";
@@ -7,18 +7,22 @@ import TextLineSeperator from "./TextLineSeperator";
 import AppTextInput from "./AppTextInput";
 import Screen from "./Screen";
 import { CommonActions } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function LoginScreen({navigation,props}) {
-
+function LoginScreen({ navigation, props }) {
   return (
     <Screen style={styles.screen}>
-      <View style={{ alignItems: "center"}}>
+      <View style={{ alignItems: "center" }}>
         <Text style={styles.heading}>Log in</Text>
       </View>
-      <GoogleCard name={"google"} />
+      <View style={{ marginHorizontal: 10 }}>
+        <GoogleCard name={"google"} />
+      </View>
       <TextLineSeperator text={"OR LOG IN WITH EMAIL"} />
-      <View style={{marginHorizontal:15}}><AppTextInput title={"Email"}/></View>
-      
+      <View style={{ marginHorizontal: 15 }}>
+        <AppTextInput title={"Email"} />
+      </View>
+
       <View style={styles.loginButton}>
         <Text>
           <Text style={styles.lightText}>By continuing you agree to our </Text>
@@ -28,21 +32,39 @@ function LoginScreen({navigation,props}) {
         </Text>
         <AppButton
           title={"Log in"}
-          onPress={() => { 
+          onPress={async() => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: "mainscreen" }],
+              })
+            );
             
-            navigation.dispatch(CommonActions.reset({
-              index: 0,
-              routes: [
-                { name: "mainscreen" }
-              ]
-            }))
+              try {
+                await AsyncStorage.setItem("loggedin", "true");
+                
+              } catch (e) {
+                console.log("login error");
+              }
+            ;
           }}
         />
-        <View style={{ alignItems: "center" }}>
-          <Text style={styles.impText}>
-            <Text style={styles.lightText}> Don't have Account?</Text>Sign up
-            instead{" "}
-          </Text>
+        <View
+          style={{
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 10,
+          }}
+        >
+          <Text style={styles.lightText}> Don't have Account?</Text>
+          <Pressable
+            onPress={() => {
+              navigation.navigate("signup");
+            }}
+          >
+            <Text style={styles.impText}>Sign up instead </Text>
+          </Pressable>
         </View>
       </View>
     </Screen>
@@ -51,7 +73,7 @@ function LoginScreen({navigation,props}) {
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.white,
-    justifyContent:"center"
+    justifyContent: "center",
   },
   loginButton: {
     marginHorizontal: 30,

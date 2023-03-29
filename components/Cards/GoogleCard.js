@@ -17,7 +17,6 @@ function GoogleCard({
           height: size,
           borderRadius: size / 2,
           backgroundColor,
-          marginHorizontal: 35,
           justifyContent: "center",
         }}
       >
@@ -37,6 +36,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     backgroundColor: colors.white,
     flexDirection: "row",
+    justifyContent:"center",
     borderRadius: 5,
     alignItems: "center",
     marginVertical: 10,

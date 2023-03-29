@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -10,12 +10,30 @@ import {
 import Slides from "../data";
 import SlideItem from "./slideitem";
 import Pagination from "./pagination";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 // add this dependencies in package.json  ==> "@expo-google-fonts/inter": "^0.2.3",
 
 
 const Slider = ({ navigation }) => {
+  const [logged, setLogged] = useState(false);
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("loggedin");
+      console.log(value);
+      if (value === "true") {
+        setLogged(true);
+        navigation.navigate('mainscreen');
+      }
+    } catch (e) {
+      console.log("get login value error", e);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   const [index, setIndex] = useState(0);
   const [pg, setP] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -35,6 +53,8 @@ const Slider = ({ navigation }) => {
       }
     )(event);
   };
+
+
 
   const handleOnviewableItemsChanged = useRef(({ viewableItems }) => {
     setIndex(viewableItems[0].index);
