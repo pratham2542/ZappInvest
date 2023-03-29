@@ -3,25 +3,30 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Stack1 from  "./navigation/navigator";
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 SplashScreen.preventAutoHideAsync()
   .then(result => console.log(`succeeded: ${result}`))
   .catch(console.warn);
 
-export default function App() {
-   //timout starts after preventAutoAsync
-   //change color and image of splash screen in app.json
-   useEffect(()=>{
-     setTimeout(async () => {
-       await SplashScreen.hideAsync();
-     }, 2000);
-   },[])
-   
   
+
+
+export default function App() {
+  //timout starts after preventAutoAsync
+  //change color and image of splash screen in app.json
+  useEffect(() => {
+    setTimeout(async () => {
+      await SplashScreen.hideAsync();
+      
+    }, 2000);
+  }, []);
+  
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <NavigationContainer>
           <Stack1 />

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import colors from "../../../config/colors";
 import AppButton from "../../Cards/AppButton";
 import GoogleCard from "../../Cards/GoogleCard";
@@ -12,7 +12,10 @@ function SignupScreen({ navigation }) {
       <View style={{ alignItems: "center" }}>
         <Text style={styles.heading}>Get Started</Text>
       </View>
-      <GoogleCard name={"google"} />
+      <View style={{marginHorizontal:10}}>
+        <GoogleCard name={"google"} />
+      </View>
+
       <TextLineSeperator text={"OR SIGNUP  WITH EMAIL"} />
       <View style={{ marginHorizontal: 20, flexDirection: "column" }}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -35,11 +38,22 @@ function SignupScreen({ navigation }) {
             navigation.navigate("login");
           }}
         />
-        <View style={{ alignItems: "center" }}>
-          <Text style={styles.impText}>
-            <Text style={styles.lightText}> Already have an Account?</Text>Log
-            in instead{" "}
-          </Text>
+        <View
+          style={{
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 10,
+          }}
+        >
+          <Text style={styles.lightText}> Already have an Account?</Text>
+          <Pressable
+            onPress={() => {
+              navigation.navigate("login");
+            }}
+          >
+            <Text style={styles.impText}> Login instead</Text>
+          </Pressable>
         </View>
       </View>
     </Screen>

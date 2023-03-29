@@ -9,6 +9,7 @@ import DocumentCard from "../../Cards/DocumentCard";
 import TeamMemberCard from "../../Cards/TeamMemberCard";
 import HighLightCard from "../../Cards/HighLightCard";
 import { List } from "react-native-paper";
+
 const Team = () => {
   return (
     <>

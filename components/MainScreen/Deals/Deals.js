@@ -1,5 +1,4 @@
 import { View, Text } from "react-native";
-import SearchBar from "react-native-dynamic-search-bar";
 import { FlatList } from "react-native-gesture-handler";
 import StartupCard from "../../Cards/StartupCard";
 import Data from "./StartUpCardData";
@@ -27,6 +26,7 @@ export default Deals = ({ navigation }) => {
   };
 
   return (
+    
     <View style={{ backgroundColor: "white" }}>
       <FlatList
         data={[0, 1, 2, 3, 4, 5]}
@@ -56,12 +56,7 @@ export default Deals = ({ navigation }) => {
                   Live Opportunities
                 </Text>
                 <View style={{ marginHorizontal: 15 }}>
-                  <SearchBar
-                    style={{ width: "100%", backgroundColor: "#F7F7F7" }}
-                    placeholder="Search here"
-                    onPress={() => alert("onPress")}
-                    onChangeText={(text) => console.log(text)}
-                  />
+            
                 </View>
 
                 <Text
