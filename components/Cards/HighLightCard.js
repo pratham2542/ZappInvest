@@ -4,7 +4,15 @@ import { Card, Title, Paragraph } from "react-native-paper";
 
 const CreateCard = () => {
   return (
-    <Card style={{ backgroundColor: "white", borderRadius: 15 }}>
+    <Card
+      style={{
+        backgroundColor: "white",
+        borderRadius: 15,
+        shadowColor: "white",
+        borderColor: "#d4f1f9",
+        borderWidth: 0.4,
+      }}
+    >
       <View style={{ borderRadius: 15 }}>
         <ImageBackground
           source={require("../../assets/uper.jpeg")}
@@ -14,7 +22,7 @@ const CreateCard = () => {
             borderBottomLeftRadius: 0,
           }}
           style={{
-            height: 70,
+            height: 55,
             width: "100%",
           }}
           resizeMode={"stretch"}
@@ -36,6 +44,7 @@ const CreateCard = () => {
           width: "100%",
           borderRadius: 15,
           borderTopLeftRadius: 0,
+          height: 70,
         }}
         style={{
           width: "100%",
@@ -59,46 +68,46 @@ export default CreateCard;
 
 const styles = StyleSheet.create({
   cover: {
-    height: 65,
-    width: 65,
-    marginTop: 20,
-    marginLeft: 20,
+    height: 55,
+    width: 55,
+    marginTop: 10,
+    marginLeft: 10,
     backgroundColor: "white",
   },
   subscribe: {
     color: "white",
-    fontSize: 10,
+    fontSize: 8,
     // fontFamily: "Inter_600SemiBold",
   },
   price: {
     color: "white",
-    fontSize: 22,
-    // fontFamily: "Inter_600SemiBold",
+    fontSize: 15,
+    fontFamily: "Inter_600SemiBold",
   },
   description: {
     backgroundColor: "white",
     borderTopLeftRadius: 35,
     borderTopRightRadius: 0,
 
-    padding: 15,
+    padding: 8,
     borderRadius: 15,
     borderWidth: 0,
   },
   offOnProduct: {
     // fontFamily: "Inter_600SemiBold",
     fontWeight: "bold",
-    fontSize: 17,
+    fontSize: 13,
   },
   getRewards: {
     // fontFamily: "Inter_600SemiBold",
     color: "grey",
-    fontSize: 10,
+    fontSize: 9,
   },
   offers: {
     // fontFamily: "Inter_600SemiBold",
     color: "grey",
-    fontSize: 15,
+    fontSize: 11,
     margin: 10,
-    marginTop: 15,
+    marginTop:5
   },
 });

@@ -39,14 +39,11 @@ function LoginScreen({ navigation, props }) {
                 routes: [{ name: "mainscreen" }],
               })
             );
-            
-              try {
-                await AsyncStorage.setItem("loggedin", "true");
-                
-              } catch (e) {
-                console.log("login error");
-              }
-            ;
+            try {
+              await AsyncStorage.setItem("loggedin", "true");
+            } catch (e) {
+              console.log("login error");
+            };
           }}
         />
         <View

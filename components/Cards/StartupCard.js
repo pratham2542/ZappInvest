@@ -22,9 +22,8 @@ const CreateCard = ({ data, handlePress }) => {
   if (!fontsLoaded) {
     return null;
   }
-  const x = data.image;
   const image = {
-    uri: x,
+    uri: data.image,
   };
 
   return (

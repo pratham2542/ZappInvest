@@ -1,6 +1,5 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import Screen from "../../StartScreen/LoginAndSignup/Screen";
 import colors from "../../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Tag from "../../Tag";
@@ -12,7 +11,7 @@ import { List } from "react-native-paper";
 
 const Team = () => {
   return (
-    <>
+    <View>
       <View
         style={{
           flexDirection: "row",
@@ -33,7 +32,7 @@ const Team = () => {
           <TeamMemberCard />
         </View>
       </View>
-    </>
+    </View>
   );
 };
 
@@ -109,104 +108,112 @@ const Details = () => {
     }
   };
   return (
-    <Screen>
-      <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.backButton}>
-            <MaterialCommunityIcons name="arrow-left" size={16} />
-            &nbsp;Back
-          </Text>
-          <View style={styles.box1}>
-            <Image
-              style={styles.box1Logo}
-              source={require("../../../assets/gradientWithBG.png")}
-            />
-            <Text style={styles.box1Heading}>Startup Name</Text>
-          </View>
-          <Text style={styles.description}>
-            Zapp Invest is an investing platform where anyone can invest in
-            startup with just INR 5000
-          </Text>
-          <View style={styles.tagContainer}>
-            <Tag title="Fintech" />
-            <Tag title="B2B" />
-            <Tag title="Investing Platform" />
-            <Tag title="Investing Platform" />
-            <Tag title="Investing Platform" />
-          </View>
-
-          <View style={styles.USPSection}>
-            <Text style={styles.USPHeading}>USP</Text>
-            <View style={styles.USPCardContainer}>
-              <View style={{ width: "49%" }}>
-                <USPCard />
-              </View>
-              <View style={{ width: "49%" }}>
-                <USPCard />
-              </View>
-              <View style={{ width: "49%" }}>
-                <USPCard />
-              </View>
-              <View style={{ width: "49%" }}>
-                <USPCard />
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.documentSection}>
-            <Text style={styles.documentHeading}>Documents</Text>
-
-            <View style={{ width: "85%" }}>
-              <DocumentCard />
-              <DocumentCard />
-              <DocumentCard />
-              <DocumentCard />
-            </View>
-          </View>
-
-          <View style={styles.tabSwitchSection}>
-            <View>
-              <ScrollView horizontal style={styles.buttonContainer}>
-                <Text
-                  style={[
-                    styles.tabSwitchHeading,
-                    pitchButton && styles.tabSwitchHeadingSelected,
-                  ]}
-                  onPress={() => handleTabSwitchButton("pitch")}
-                >
-                  Pitch
-                </Text>
-                <Text
-                  style={[
-                    styles.tabSwitchHeading,
-                    faqButton && styles.tabSwitchHeadingSelected,
-                  ]}
-                  onPress={() => handleTabSwitchButton("faq")}
-                >
-                  FAQs
-                </Text>
-                <Text
-                  style={[
-                    styles.tabSwitchHeading,
-                    teamButton && styles.tabSwitchHeadingSelected,
-                  ]}
-                  onPress={() => handleTabSwitchButton("team")}
-                >
-                  Team
-                </Text>
-              </ScrollView>
-            </View>
-
-            <View>
-              {/* {pitchButton&& } */}
-              {teamButton && <Team />}
-              {faqButton && <Faq />}
-            </View>
-          </View>
-          <HighLightCard />
+    // <Screen>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.backButton}>
+          <MaterialCommunityIcons name="arrow-left" size={16} />
+          &nbsp;Back
+        </Text>
+        <View style={styles.box1}>
+          <Image
+            style={styles.box1Logo}
+            source={require("../../../assets/gradientWithBG.png")}
+          />
+          <Text style={styles.box1Heading}>Startup Name</Text>
         </View>
-      </ScrollView>
-    </Screen>
+        <Text style={styles.description}>
+          Zapp Invest is an investing platform where anyone can invest in
+          startup with just INR 5000
+        </Text>
+        <View style={styles.tagContainer}>
+          <Tag title="Fintech" />
+          <Tag title="B2B" />
+          <Tag title="Investing Platform" />
+          <Tag title="Investing Platform" />
+          <Tag title="Investing Platform" />
+        </View>
+
+        <View style={styles.USPSection}>
+          <Text style={styles.USPHeading}>USP</Text>
+          <View style={styles.USPCardContainer}>
+            <View style={{ width: "49%" }}>
+              <USPCard />
+            </View>
+            <View style={{ width: "49%" }}>
+              <USPCard />
+            </View>
+            <View style={{ width: "49%" }}>
+              <USPCard />
+            </View>
+            <View style={{ width: "49%" }}>
+              <USPCard />
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.documentSection}>
+          <Text style={styles.documentHeading}>Documents</Text>
+
+          <View>
+            <DocumentCard />
+            <DocumentCard />
+            <DocumentCard />
+            <DocumentCard />
+          </View>
+        </View>
+        <View style={{marginTop:15}}>
+          {[0, 1, 2].map((key, val) => {
+            return (
+              <View style={{ marginTop: 10 }} key={key}>
+                <HighLightCard />
+              </View>
+            );
+          })}
+        </View>
+
+        <View style={styles.tabSwitchSection}>
+          <View>
+            <ScrollView horizontal style={styles.buttonContainer}>
+              <Text
+                style={[
+                  styles.tabSwitchHeading,
+                  pitchButton && styles.tabSwitchHeadingSelected,
+                ]}
+                onPress={() => handleTabSwitchButton("pitch")}
+              >
+                Pitch
+              </Text>
+              <Text
+                style={[
+                  styles.tabSwitchHeading,
+                  faqButton && styles.tabSwitchHeadingSelected,
+                ]}
+                onPress={() => handleTabSwitchButton("faq")}
+              >
+                FAQs
+              </Text>
+              <Text
+                style={[
+                  styles.tabSwitchHeading,
+                  teamButton && styles.tabSwitchHeadingSelected,
+                ]}
+                onPress={() => handleTabSwitchButton("team")}
+              >
+                Team
+              </Text>
+            </ScrollView>
+          </View>
+
+          <View>
+            {/* {pitchButton&& } */}
+            {teamButton && <Team />}
+            {faqButton && <Faq />}
+          </View>
+        </View>
+      </View>
+    </ScrollView>
+    // </Screen>
   );
 };
 

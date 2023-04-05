@@ -4,8 +4,8 @@
     "slug": "test",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/gradientWithBG.png",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/gradientWithBG.png",
       "resizeMode": "contain",
@@ -19,8 +19,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/gradientWithBG.png",
+        "backgroundColor": "#000000"
       },
       "package": "com.pratham2542.test"
     },
