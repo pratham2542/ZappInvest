@@ -3,22 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Deals from "./Deals/Deals";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Portfolio from"./Portfolio/Portfolio";
+import Home from "./Home/HomeScreen";
 
-function Home() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-// function Portfolio() {
-  // return (
-  //   <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-  //     <Text>Portfolio!</Text>
-  //   </View>
-  // );
-// }
 
 function Account() {
   return (

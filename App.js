@@ -26,13 +26,13 @@ export default function App() {
   
 
   return (
-    // <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <NavigationContainer>
           <Stack1 />
         </NavigationContainer>
       </View>
-    // </SafeAreaView>
+    </SafeAreaView>
   );
 }
 
