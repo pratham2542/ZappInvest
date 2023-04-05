@@ -11,7 +11,7 @@ import Slides from "../data";
 import SlideItem from "./slideitem";
 import Pagination from "./pagination";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { CommonActions } from "@react-navigation/native";
 
 // add this dependencies in package.json  ==> "@expo-google-fonts/inter": "^0.2.3",
 
@@ -24,7 +24,12 @@ const Slider = ({ navigation }) => {
       console.log(value);
       if (value === "true") {
         setLogged(true);
-        navigation.navigate('mainscreen');
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: "mainscreen" }],
+          })
+        );
       }
     } catch (e) {
       console.log("get login value error", e);

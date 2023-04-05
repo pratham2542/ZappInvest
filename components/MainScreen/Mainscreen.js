@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Deals from "./Deals/Deals";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Portfolio from"./Portfolio/Portfolio";
 
 function Home() {
   return (
@@ -11,13 +12,13 @@ function Home() {
   );
 }
 
-function Portfolio() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Portfolio!</Text>
-    </View>
-  );
-}
+// function Portfolio() {
+  // return (
+  //   <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+  //     <Text>Portfolio!</Text>
+  //   </View>
+  // );
+// }
 
 function Account() {
   return (
@@ -43,7 +44,7 @@ export default Mainscreen = () => {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Account") {
             iconName = focused ? "person" : "person-outline";
-          } else if (route.name === "Nav") {
+          } else if (route.name === "Deals") {
             iconName = focused ? "ios-list" : "ios-list-outline";
           } else if (route.name === "Portfolio") {
             iconName = focused ? "cash" : "cash-outline";
@@ -51,12 +52,12 @@ export default Mainscreen = () => {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: "#056ffa",
-        tabBarInactiveTintColor: "gray",
+        tabBarInactiveTintColor: "grey",
       })}
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Portfolio" component={Portfolio} />
-      <Tab.Screen name="Nav" component={Deals} />
+      <Tab.Screen name="Deals" component={Deals} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
