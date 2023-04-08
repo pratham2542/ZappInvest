@@ -1,6 +1,6 @@
 import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
-import colors from "../../../config/colors";
+import colors from "../../config/colors";
 
 function AppTextInput({ title,width="100%",...otherProps }) {
   return (

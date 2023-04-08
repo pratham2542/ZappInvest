@@ -5,7 +5,7 @@ import AppButton from "../../Cards/AppButton";
 import GoogleCard from "../../Cards/GoogleCard";
 import TextLineSeperator from "./TextLineSeperator";
 import AppTextInput from "./AppTextInput";
-import Screen from "./Screen";
+import Screen from "../../MainScreen/Screen";
 import { CommonActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

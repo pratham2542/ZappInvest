@@ -7,7 +7,7 @@ import CardCarousel from "./CardCarousel";
 import Data from "../Deals/StartUpCardData";
 import LearnCard from '../../Cards/LearnCard'
 import Screen from '../Screen'
-import AppButton from '../../Cards/AppButton'
+import AppButton from '../../utils/AppButton'
 const HomeScreen = () => {
   return (
     <Screen>
