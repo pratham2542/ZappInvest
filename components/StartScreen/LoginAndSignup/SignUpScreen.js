@@ -5,7 +5,9 @@ import AppButton from "../../Cards/AppButton";
 import GoogleCard from "../../Cards/GoogleCard";
 import TextLineSeperator from "./TextLineSeperator";
 import AppTextInput from "./AppTextInput";
-import Screen from "./Screen";
+import Screen from "../../MainScreen/Screen";
+
+
 function SignupScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
