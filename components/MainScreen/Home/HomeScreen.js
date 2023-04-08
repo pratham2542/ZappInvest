@@ -3,7 +3,7 @@ import React from 'react'
 import colors from '../../../config/colors'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import StartupCard from '../../Cards/StartupCard'
-import CardCarousel from "./CardCarousel";
+import CardCarousel from "../../Cards/CardCarousel"
 import Data from "../Deals/StartUpCardData";
 import LearnCard from '../../Cards/LearnCard'
 import Screen from '../Screen'

@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import colors from "../../../config/colors";
-import AppButton from "../../Cards/AppButton";
+import AppButton from "../../utils/AppButton"
 import GoogleCard from "../../Cards/GoogleCard";
 import TextLineSeperator from "./TextLineSeperator";
-import AppTextInput from "./AppTextInput";
+import AppTextInput from "../../utils/AppTextInput";
 import Screen from "../../MainScreen/Screen";
 import { CommonActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";

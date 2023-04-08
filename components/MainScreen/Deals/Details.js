@@ -2,7 +2,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import colors from "../../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Tag from "../../Tag";
+import Tag from "../../utils/Tag";
 import USPCard from "../../Cards/USPCard";
 import DocumentCard from "../../Cards/DocumentCard";
 import TeamMemberCard from "../../Cards/TeamMemberCard";

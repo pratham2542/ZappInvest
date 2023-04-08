@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-import Screen from '../components/Screen';
-import colors from '../config/colors';
-import AppButton from '../components/AppButton';
+import Screen from '../Screen';
+import colors from '../../../config/colors';
+import AppButton from '../../utils/AppButton';
 
 
 const EditProfileScreen = () => {

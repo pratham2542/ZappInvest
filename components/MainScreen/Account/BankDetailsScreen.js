@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-import Screen from '../components/Screen';
-import colors from '../config/colors';
+import Screen from '../Screen'
+import colors from '../../../config/colors';
 
 const BankDetailsScreen = () => {
   const [name, setName] = useState('John Doe');
