@@ -6,6 +6,8 @@ import Details from "../components/MainScreen/Deals/Details";
 import Mainscreen from "../components/MainScreen/Mainscreen";
 import EditProfileScreen from "../components/MainScreen/Account/EditProfileScreen";
 import BankDetailScreen from "../components/MainScreen/Account/BankDetailsScreen";
+import InvestorScreen from "../components/MainScreen/Account/InvesterScreen";
+import DetailsInvestorScreen from "../components/MainScreen/Account/DetaiIInvestorScreen";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +25,8 @@ stack1 = () => {
       <Stack.Screen name="details" component={Details} />
       <Stack.Screen name="editdetail" component={EditProfileScreen} />
       <Stack.Screen name="bankdetail" component={BankDetailScreen}/>
+      <Stack.Screen name="investor" component={InvestorScreen} />
+      <Stack.Screen name="investordetails" component={DetailsInvestorScreen}/>
     </Stack.Navigator>
   );
 };

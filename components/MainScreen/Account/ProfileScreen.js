@@ -26,7 +26,7 @@ const ProfileScreen = ({navigation}) => {
     console.log("Clicked");
   };
   const notebookCheckOutline = () => {
-    // navigation.navigate("details");
+    navigation.navigate("details");
     console.log("Clicked");
   };
   const logout = async() => {
