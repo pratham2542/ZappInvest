@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableWithoutFeedback,Image } from 'react-native';
-import Screen from '../components/Screen';
+import Screen from '../Screen';
 import { useNavigation } from '@react-navigation/native';
-
 
 const LineSeparator = () => {
   return <View style={{ borderBottomColor: '#f7f7f7', borderBottomWidth: 1, width: '100%' }} />;
 };
 
 const InvestorScreen = () => {
-   // const navigation = useNavigation();
+    const navigation = useNavigation();
   const [selectedQuestion, setSelectedQuestion] = useState('');
 
   const handleQuestionClick = (question) => {
     setSelectedQuestion(question);
-    //navigation.navigate('Details', { item });
+  navigation.navigate('investordetails', { question });
   };
 
   return (
@@ -23,7 +22,7 @@ const InvestorScreen = () => {
         style={{width: '100%',
             height: 200,
             }}
-        source={require('../assets/investorimage.jpg')}
+        source={require('../../../assets/investorimage.jpg')}
       />
       <Text style={{ textAlign: 'center',fontSize: 24, fontWeight: 'bold' ,marginTop:5}}>For Investors</Text>
       <TouchableWithoutFeedback onPress={() => handleQuestionClick(1)}>

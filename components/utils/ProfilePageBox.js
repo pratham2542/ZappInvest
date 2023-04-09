@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native'
+import { StyleSheet, Text, View} from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import colors from '../config/colors';
+import colors from '../../config/colors';
+import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-function ProfilePageBox({name,heading,size,iconColor}) {
+function ProfilePageBox({name,heading,size,iconColor,route}) {
+  const navigation=useNavigation()
 return (
-    <View>
+  <>
+    <Pressable onPress={()=>{navigation.navigate(route)}}>
     <View style={styles.container}>
     <MaterialCommunityIcons
           name={name}
@@ -18,8 +23,10 @@ return (
       </View>
     </View>
     </View>
+
+  </Pressable>
     <View style={styles.separator} />
-  </View>
+    </>
   
  );
 }

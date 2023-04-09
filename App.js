@@ -6,6 +6,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AccountNavigator from './navigation/AccountNavigator';
+import QuestionNavigator from './navigation/questionNavigator';
 
 SplashScreen.preventAutoHideAsync()
   .then(result => console.log(`succeeded: ${result}`))
@@ -29,7 +31,7 @@ export default function App() {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <NavigationContainer>
-          <Stack1 />
+        <Stack1/>
         </NavigationContainer>
       </View>
     </SafeAreaView>

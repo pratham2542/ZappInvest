@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
+
 const DetailsInvestorScreen = () => {
   const route = useRoute();
-  const item = route.params.item;
+  const item = route.params.question;
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
