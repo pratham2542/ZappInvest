@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-import Screen from '../Screen'
 import colors from '../../../config/colors';
+import AppButton from '../../utils/AppButton';
+
 
 const BankDetailsScreen = () => {
   const [name, setName] = useState('John Doe');
@@ -20,8 +21,8 @@ const BankDetailsScreen = () => {
   };
 
   return (
-    <Screen style={styles.container}>
-    <ScrollView style={styles.container}>
+    <View style={{flex:1,backgroundColor:"#ffffff"}}>
+      <ScrollView style={styles.container}>
       <Text style={styles.title}>Bank Details</Text>
       <View style={styles.fieldContainer}>
         <Text style={styles.fieldName}>Name</Text>
@@ -65,27 +66,29 @@ const BankDetailsScreen = () => {
         />
       </View>
       {editable ? (
-        <Button
-          title="Save"
-          onPress={handleSubmit}
-        />
-      ) : (
-        <Button
-          title="Edit"
-          onPress={handleEdit}
-        />
-      )}
+          <AppButton 
+            title="Save"
+            onPress={handleSubmit}
+          />
+        ) : (
+          <AppButton
+            title="Edit"
+            onPress={handleEdit}
+          />
+        )}
     </ScrollView>
-    </Screen>
+
+    </View>
+    
+    
   );
 };
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
       padding: 20,
       backgroundColor: '#fff',
-      marginTop:70
+      marginTop:200,
     },
     title: {
       fontSize: 24,
