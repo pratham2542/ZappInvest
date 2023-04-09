@@ -5,9 +5,7 @@ import Stack1 from  "./navigation/navigator";
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import AccountNavigator from './navigation/AccountNavigator';
-import QuestionNavigator from './navigation/questionNavigator';
+
 
 SplashScreen.preventAutoHideAsync()
   .then(result => console.log(`succeeded: ${result}`))

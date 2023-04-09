@@ -10,7 +10,7 @@ import Screen from '../Screen'
 import AppButton from '../../utils/AppButton'
 const HomeScreen = () => {
   return (
-    <Screen>
+    
       <View style = {styles.container}>
         <ScrollView>
           <View style = {styles.section1}>
@@ -76,7 +76,7 @@ const HomeScreen = () => {
           </View>
         </ScrollView>
       </View>
-    </Screen>
+    
   )
 }
 

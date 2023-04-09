@@ -4,15 +4,8 @@ import Deals from "./Deals/Deals";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Portfolio from"./Portfolio/Portfolio";
 import Home from "./Home/HomeScreen";
+import Account from "./Account/ProfileScreen";
 
-
-function Account() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Account!</Text>
-    </View>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 

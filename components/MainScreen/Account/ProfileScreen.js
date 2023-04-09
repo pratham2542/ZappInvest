@@ -1,15 +1,49 @@
 import React from 'react';
 import { View, Text, Image, ScrollView ,TouchableHighlight } from 'react-native';
 import ProfilePageBox from '../../utils/ProfilePageBox';
-import Screen from '../Screen';
 import { AntDesign } from '@expo/vector-icons'; 
 import colors from '../../../config/colors';
+import { CommonActions } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 
 const ProfileScreen = ({navigation}) => {
-   
+  const accountEdit = () => {
+    navigation.navigate("editdetail");
+    console.log("Clicked");
+  };
+  const bank = () => {
+    navigation.navigate("bankdetail");
+    console.log("Clicked");
+  };
+  const contacts = () => {
+    // navigation.navigate("details");
+    console.log("Clicked");
+  };
+  const security = () => {
+    // navigation.navigate("details");
+    console.log("Clicked");
+  };
+  const notebookCheckOutline = () => {
+    // navigation.navigate("details");
+    console.log("Clicked");
+  };
+  const logout = async() => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: "Slider" }],
+      })
+    );
+    try {
+      await AsyncStorage.setItem("loggedin", "false");
+    } catch (e) {
+      console.log("login error");
+    };
+  }
   return (
-    <Screen>
+    
         <ScrollView style={styles.container}>
             <View style={styles.profileContainer}>
                 <View style={styles.profilePhoto}>
@@ -29,14 +63,14 @@ const ProfileScreen = ({navigation}) => {
         <View style={styles.section}>
             <Text style={styles.statLabel}>9509827590</Text>
         </View>
-        <ProfilePageBox name="account-edit" heading="Edit Details" size={50} iconColor="black" route="editdetail" />
-        <ProfilePageBox name="bank" heading="Bank Details" size={50} iconColor="black" route="bankdetail" />
-        <ProfilePageBox name="contacts" heading="Contact Us" size={50} iconColor="black" route="contact" />
-        <ProfilePageBox name="security" heading="Privacy Policy" size={50} iconColor="black" route="privacy" />
-        <ProfilePageBox name="notebook-check-outline" heading="Terms And Conditions" size={50} iconColor="black" route="termsandconditions"/>
-        <ProfilePageBox name="logout" heading="logout" size={50} iconColor="black" route="logout" />
+        <ProfilePageBox name="account-edit" heading="Edit Details" size={50} iconColor="black" onPress={accountEdit} />
+        <ProfilePageBox name="bank" heading="Bank Details" size={50} iconColor="black" onPress={bank} />
+        <ProfilePageBox name="contacts" heading="Contact Us" size={50} iconColor="black" onPress={contacts} />
+        <ProfilePageBox name="security" heading="Privacy Policy" size={50} iconColor="black" onPress={security} />
+        <ProfilePageBox name="notebook-check-outline" heading="Terms And Conditions" size={50} iconColor="black" onPress={notebookCheckOutline}/>
+        <ProfilePageBox name="logout" heading="logout" size={50} iconColor="black" onPress={logout} />
         </ScrollView>
-    </Screen>
+    
   );
 };
 

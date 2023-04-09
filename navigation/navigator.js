@@ -4,6 +4,8 @@ import Signupscreen from "../components/StartScreen/LoginAndSignup/SignUpScreen"
 import Slider from "../components/StartScreen/SliderComponent/components/slider";
 import Details from "../components/MainScreen/Deals/Details";
 import Mainscreen from "../components/MainScreen/Mainscreen";
+import EditProfileScreen from "../components/MainScreen/Account/EditProfileScreen";
+import BankDetailScreen from "../components/MainScreen/Account/BankDetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -19,6 +21,8 @@ stack1 = () => {
       <Stack.Screen name="signup" component={Signupscreen} />
       <Stack.Screen name="mainscreen" component={Mainscreen} />
       <Stack.Screen name="details" component={Details} />
+      <Stack.Screen name="editdetail" component={EditProfileScreen} />
+      <Stack.Screen name="bankdetail" component={BankDetailScreen}/>
     </Stack.Navigator>
   );
 };
