@@ -4,13 +4,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../../config/colors';
 import { TouchableOpacity } from 'react-native';
 import { Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
-function ProfilePageBox({name,heading,size,iconColor,route}) {
-  const navigation=useNavigation()
+function ProfilePageBox({name,heading,size,iconColor,route,onPress}) {
 return (
   <>
-    <Pressable onPress={()=>{navigation.navigate(route)}}>
+    <Pressable onPress={onPress}>
     <View style={styles.container}>
     <MaterialCommunityIcons
           name={name}

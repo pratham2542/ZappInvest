@@ -23,8 +23,9 @@ const EditProfileScreen = () => {
     };
   
     return (
-    <Screen style={styles.container}>
-      <ScrollView >
+    <View style={{backgroundColor:"white",flex:1,justifyContent:"center"}}>
+        <ScrollView style={{marginTop:150}}>
+        <View style={{margin:20,backgroundColor:"white"}}>
         <Text style={styles.title}>Edit Details</Text>
         <View style={styles.fieldContainer}>
           <Text style={styles.fieldName}>Name</Text>
@@ -89,8 +90,12 @@ const EditProfileScreen = () => {
             onPress={handleEdit}
           />
         )}
+        </View>
+        
       </ScrollView>
-      </Screen>
+    </View>
+      
+      
     );
   };
   
