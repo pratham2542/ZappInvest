@@ -29,6 +29,10 @@ const ProfileScreen = ({navigation}) => {
     navigation.navigate("details");
     console.log("Clicked");
   };
+  const startupForm = () => {
+    navigation.navigate("startupForm");
+    console.log("Clicked");
+  };
   const logout = async() => {
     navigation.dispatch(
       CommonActions.reset({
@@ -68,6 +72,7 @@ const ProfileScreen = ({navigation}) => {
         <ProfilePageBox name="contacts" heading="Contact Us" size={50} iconColor="black" onPress={contacts} />
         <ProfilePageBox name="security" heading="Privacy Policy" size={50} iconColor="black" onPress={security} />
         <ProfilePageBox name="notebook-check-outline" heading="Terms And Conditions" size={50} iconColor="black" onPress={notebookCheckOutline}/>
+        <ProfilePageBox name="notebook" heading="Register startup" size={50} iconColor="black" onPress={startupForm} />
         <ProfilePageBox name="logout" heading="logout" size={50} iconColor="black" onPress={logout} />
         </ScrollView>
     

@@ -2,12 +2,14 @@ import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import colors from "../../config/colors";
 
-function AppTextInput({ title,width="100%",...otherProps }) {
+function AppTextInput({style = {},handleChange,name, placeholder,width="100%",...otherProps }) {
   return (
     <View style={[styles.container,{width:width}]}>
       <TextInput
-        placeholder={title}
+        style = {[styles.text, style]}
+        placeholder={placeholder}
         placeholderTextColor={colors.light}
+        onChangeText={handleChange(name)}
         {...otherProps}
       />
     </View>
@@ -22,6 +24,9 @@ const styles = StyleSheet.create({
     padding: 15,
     marginVertical: 10,
   },
+  text:{
+    flex: 1,
+  }
   
 });
 

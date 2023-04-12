@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View, Dimensions } from "react-native";
 import React, { useState } from "react";
 import colors from "../../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -8,6 +8,17 @@ import DocumentCard from "../../Cards/DocumentCard";
 import TeamMemberCard from "../../Cards/TeamMemberCard";
 import HighLightCard from "../../Cards/HighLightCard";
 import { List } from "react-native-paper";
+import WebView from 'react-native-webview';
+
+
+// const pitch = () => {
+//   const source = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
+//   return(
+//     <>
+
+//     </>
+//     );
+// }
 
 const Team = () => {
   return (
@@ -134,6 +145,15 @@ const Details = () => {
           <Tag title="Investing Platform" />
         </View>
 
+        <View style = {{marginTop: 20}}>
+          <WebView
+            javaScriptEnabled={true}
+            style={{ width: "100%", height: 250, backgroundColor: "black", borderWidth: 10, }}
+            // source={{html: `<iframe width="100%" height="100%" src=${link} title=${movieName}></iframe>`,}}/>
+            source={{ html: `<html><iframe width="100%" height="100%" src="https://www.youtube.com/embed/T3fEF7xg0Vo" frameborder="0" gyroscope; picture-in-picture></iframe></html>` }}
+          />
+        </View>
+
         <View style={styles.USPSection}>
           <Text style={styles.USPHeading}>USP</Text>
           <View style={styles.USPCardContainer}>
@@ -162,7 +182,7 @@ const Details = () => {
             <DocumentCard />
           </View>
         </View>
-        <View style={{marginTop:15}}>
+        <View style={{ marginTop: 15 }}>
           {[0, 1, 2].map((key, val) => {
             return (
               <View style={{ marginTop: 10 }} key={key}>
@@ -224,6 +244,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginTop: 15,
     marginBottom: 15,
+    // backgroundColor: colors.white,
+
   },
   backButton: {
     color: colors.primary,

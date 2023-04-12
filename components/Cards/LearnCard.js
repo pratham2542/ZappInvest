@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import colors from '../../config/colors';
 
-const LearnCard = ({title = "this is title", description = "this is description", btnname = "Learn", backgroundColor =  colors.lightGrey}) => {
+const LearnCard = ({title = "this is title", description = "this is description", btnname = "Learn", backgroundColor =  colors.lightGrey}, onPress) => {
   return (
     <View style={[styles.cardContainer,{backgroundColor: backgroundColor}]}>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress = {onPress} style={styles.button}>
           <Text style={styles.buttonText}>{btnname}</Text>
         </TouchableOpacity>
       </View>

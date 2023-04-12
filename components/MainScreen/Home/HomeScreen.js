@@ -1,35 +1,48 @@
 import { View, Text, StyleSheet, ScrollView,Image } from 'react-native'
 import React from 'react'
 import colors from '../../../config/colors'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons,MaterialIcons } from '@expo/vector-icons'
 import StartupCard from '../../Cards/StartupCard'
 import CardCarousel from "../../Cards/CardCarousel"
 import Data from "../Deals/StartUpCardData";
 import LearnCard from '../../Cards/LearnCard'
 import Screen from '../Screen'
 import AppButton from '../../utils/AppButton'
+import { Octicons } from '@expo/vector-icons'; 
+
 const HomeScreen = () => {
   return (
     
       <View style = {styles.container}>
         <ScrollView>
           <View style = {styles.section1}>
-              <View style = {styles.section1Container}>
-                <Text style = {{color : colors.white, fontSize : 30, fontWeight: '900', textAlign: 'center'}}>ZappInvest</Text>
-                <Text style = {{color : colors.white, fontSize : 16, fontWeight: '500', textAlign: 'center'}}>Place where best startup raise for their community</Text>
+              <View style = {styles.section1Container1}>
+                <Text style = {{color : colors.white, fontSize : 36, fontWeight: '900', textAlign: 'center'}}>ZappInvest</Text>
+                <Text style = {{color : colors.white, fontSize : 14, fontWeight: '500', textAlign: 'center'}}>Place where best startup raise {"\n"}for their community</Text>
                 <View style = {{flexDirection : 'row', justifyContent: 'space-evenly'}}>
                   <AppButton width='45%' title = "Register startup"/>
                   <AppButton width='45%' title = "Become investor"/>
                 </View>
-
-                <View style = {{width: '90%', height: 70, backgroundColor : colors.white, alignSelf: 'center', borderRadius: 10,}}> 
-
+              </View>
+              <View style = {styles.section1Container2}>
+                <View style = {styles.section1Container2Box}>
+                  <MaterialIcons name="verified" size={18} color="green" />
+                  <Text style = {{color : colors.light,fontSize: 16, marginLeft: 20,borderBottomWidth: 0.5,borderBottomColor: colors.light,flex: 1,}}>Creat profile</Text>
+                </View>
+    
+                <View style = {styles.section1Container2Box}>
+                  <MaterialIcons name="cancel" size={18} color="red" />
+                  <Text style = {{color : colors.light,fontSize: 16, marginLeft: 20,borderBottomWidth: 0.5,borderBottomColor: colors.light,flex: 1,}}>Complete KYC</Text>
+                </View>
+                <View style = {styles.section1Container2Box}>
+                  <MaterialIcons name="cancel" size={18} color="red" />
+                  <Text style = {{color : colors.light,fontSize: 16, marginLeft: 20,borderBottomWidth: 0.5,borderBottomColor: colors.light,flex: 1,}}>Add Bank details</Text>
                 </View>
               </View>
           </View>
 
           <View style = {{marginTop : 20, }}>
-            <LearnCard/>
+            <LearnCard title = {'Learn more about startup investing'} description='Understand in 60sec' onPress = {()=>console.log('learn card clicked')}/>
           </View>
 
 
@@ -90,14 +103,33 @@ const styles = StyleSheet.create({
 
   // section - 1
   section1:{
-    height: 300,
+    // height: 300,
     borderRadius: 10,
-    backgroundColor: colors.darkBlue,
     marginHorizontal : 10,
+    elevation: 2
 
   },
-  section1Container:{
-    // marginHorizontal : 10,
+  section1Container1:{
+    paddingTop : 20,
+    paddingBottom : 20,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    backgroundColor: colors.darkBlue,
+
+  },
+  section1Container2:{
+    paddingTop : 20,
+    paddingBottom : 20,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    backgroundColor: colors.white,
+
+  },
+  section1Container2Box:{
+    padding: 10,
+    flexDirection: 'row',
+    
+
   },
 
 
