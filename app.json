@@ -7,9 +7,9 @@
     "icon": "./assets/gradientWithBG.png",
     "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/gradientWithBG.png",
+      "image": "./assets/splashScreen.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#fff"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -29,7 +29,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "94206716-c6e8-4f89-a3cf-86b40e58aac5"
+        "projectId": "f55b8ee0-0160-4a8c-8643-f023936534d1"
       }
     }
   }

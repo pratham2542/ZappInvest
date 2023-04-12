@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import colors from '../config/colors';
+import colors from '../../config/colors';
 
 const AppUploadField = ({onPress ,title,width="100%",...otherProps }) => {
     return (

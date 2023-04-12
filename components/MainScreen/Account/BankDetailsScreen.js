@@ -112,8 +112,7 @@ const styles = StyleSheet.create({
       padding: 10,
     },
     disabledInput: {
-      backgroundColor: colors.lightGrey
-      ,
+      backgroundColor: colors.lightGrey,
     },
   })
 
