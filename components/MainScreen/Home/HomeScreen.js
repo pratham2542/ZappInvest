@@ -10,9 +10,9 @@ import Screen from '../Screen'
 import AppButton from '../../utils/AppButton'
 import { Octicons } from '@expo/vector-icons'; 
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
-    
+      <Screen>
       <View style = {styles.container}>
         <ScrollView>
           <View style = {styles.section1}>
@@ -20,14 +20,14 @@ const HomeScreen = () => {
                 <Text style = {{color : colors.white, fontSize : 36, fontWeight: '900', textAlign: 'center'}}>ZappInvest</Text>
                 <Text style = {{color : colors.white, fontSize : 14, fontWeight: '500', textAlign: 'center'}}>Place where best startup raise {"\n"}for their community</Text>
                 <View style = {{flexDirection : 'row', justifyContent: 'space-evenly'}}>
-                  <AppButton width='45%' title = "Register startup"/>
-                  <AppButton width='45%' title = "Become investor"/>
+                  <AppButton width='45%' title = "Register startup" onPress= {()=>navigation.navigate("startupForm")} />
+                  <AppButton width='45%' title = "Explore deals" onPress= {()=>navigation.navigate("Deals")}/>
                 </View>
               </View>
               <View style = {styles.section1Container2}>
                 <View style = {styles.section1Container2Box}>
                   <MaterialIcons name="verified" size={18} color="green" />
-                  <Text style = {{color : colors.light,fontSize: 16, marginLeft: 20,borderBottomWidth: 0.5,borderBottomColor: colors.light,flex: 1,}}>Creat profile</Text>
+                  <Text style = {{color : colors.light,fontSize: 16, marginLeft: 20,borderBottomWidth: 0.5,borderBottomColor: colors.light,flex: 1,}}>Create profile</Text>
                 </View>
     
                 <View style = {styles.section1Container2Box}>
@@ -55,33 +55,33 @@ const HomeScreen = () => {
             <View style = {{marginTop : 10,}}><StartupCard data={Data[4 - 2]} /></View>
           </View>
 
-          <View>
+          {/* <View>
             <CardCarousel/>
-          </View>
+          </View> */}
 
           <View style = {styles.section2}>
             <View style = {styles.section2Box}>
               <Text style = {styles.section2Heading}>If you had invested ₹5000 in the initial round then your worth today could be</Text>
               <View style = {styles.section2CardsContainer}>
                 <View style = {styles.section2Card}>
-                  <Image style = {styles.section2CardImage} source = {{uri: 'https://www.nicepng.com/png/detail/919-9199193_logo-ola-cabs-logo.png'}}/>
+                  <Image style = {styles.section2CardImage} source = {{uri: 'https://res.cloudinary.com/dtqgtredx/image/upload/v1681451340/startups/Ola_Cabs_logo.svg.74ab207fca95523c7d97_czi1u0.png'}}/>
                   <Text style = {styles.section2CardHeading}>OLA</Text>
+                  <Text style = {styles.section2CardHeading2}>₹800000</Text>
+                </View>
+                <View style = {styles.section2Card}>
+                  <Image style = {styles.section2CardImage} source = {{uri: 'https://res.cloudinary.com/dtqgtredx/image/upload/v1681451309/startups/ZomatoLogo.ef807f45b5462e5eaeda_ojcbzh.png'}}/>
+                  <Text style = {styles.section2CardHeading}>Zomato</Text>
                   <Text style = {styles.section2CardHeading2}>₹1900000</Text>
                 </View>
                 <View style = {styles.section2Card}>
-                  <Image style = {styles.section2CardImage} source = {{uri: 'https://www.nicepng.com/png/detail/919-9199193_logo-ola-cabs-logo.png'}}/>
-                  <Text style = {styles.section2CardHeading}>OLA</Text>
-                  <Text style = {styles.section2CardHeading2}>₹1900000</Text>
+                  <Image style = {styles.section2CardImage} source = {{uri: 'https://res.cloudinary.com/dtqgtredx/image/upload/v1681451307/startups/download_lttufy.png'}}/>
+                  <Text style = {styles.section2CardHeading}>BharatPe</Text>
+                  <Text style = {styles.section2CardHeading2}>₹450000</Text>
                 </View>
                 <View style = {styles.section2Card}>
-                  <Image style = {styles.section2CardImage} source = {{uri: 'https://www.nicepng.com/png/detail/919-9199193_logo-ola-cabs-logo.png'}}/>
-                  <Text style = {styles.section2CardHeading}>OLA</Text>
-                  <Text style = {styles.section2CardHeading2}>₹1900000</Text>
-                </View>
-                <View style = {styles.section2Card}>
-                  <Image style = {styles.section2CardImage} source = {{uri: 'https://www.nicepng.com/png/detail/919-9199193_logo-ola-cabs-logo.png'}}/>
-                  <Text style = {styles.section2CardHeading}>OLA</Text>
-                  <Text style = {styles.section2CardHeading2}>₹1900000</Text>
+                  <Image style = {styles.section2CardImage} source = {{uri: 'https://res.cloudinary.com/dtqgtredx/image/upload/v1681451297/startups/download_1_g8naqz.png'}}/>
+                  <Text style = {styles.section2CardHeading}>Byju</Text>
+                  <Text style = {styles.section2CardHeading2}>₹3000000</Text>
                 </View>
                 
               </View>
@@ -89,6 +89,7 @@ const HomeScreen = () => {
           </View>
         </ScrollView>
       </View>
+      </Screen>
     
   )
 }

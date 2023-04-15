@@ -2,14 +2,14 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { Card,Title, Paragraph } from 'react-native-paper'
 
-const TeamMemberCard = () => {
+const TeamMemberCard = ({image='https://res.cloudinary.com/dtqgtredx/image/upload/v1681450345/startups/avatarphoto_yy2xxm.png' , name="Naman Goyal", job="Founder & CEO"}) => {
     return (
         <Card style={styles.card}>
             <Card.Content style = {styles.content}>
-                <Image source={require("../../assets/NamanPhoto.jpg")} style={styles.image} />
-                    <Title style={styles.title}>Naman Goyal</Title>
+                <Image source={{uri: image}} style={styles.image} />
+                    <Title style={styles.title}>{name}</Title>
                     <Paragraph style={styles.description}>
-                        Founder & CEO
+                        {job}
                     </Paragraph>
             </Card.Content>
         </Card>

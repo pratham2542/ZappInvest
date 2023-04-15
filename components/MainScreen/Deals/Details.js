@@ -20,7 +20,7 @@ import WebView from 'react-native-webview';
 //     );
 // }
 
-const Team = () => {
+const Team = ({ team }) => {
   return (
     <View>
       <View
@@ -30,71 +30,40 @@ const Team = () => {
           flexWrap: "wrap",
         }}
       >
-        <View style={{ width: "49%" }}>
-          <TeamMemberCard />
-        </View>
-        <View style={{ width: "49%" }}>
-          <TeamMemberCard />
-        </View>
-        <View style={{ width: "49%" }}>
-          <TeamMemberCard />
-        </View>
-        <View style={{ width: "49%" }}>
-          <TeamMemberCard />
-        </View>
+        {team && team.map((t,index) => {
+          return (
+            <View key = {index} style={{ width: "49%" }}><TeamMemberCard image={t.img} job={t.job} name={t.name} /></View>
+          );
+        })
+        }
       </View>
     </View>
   );
 };
 
-const Faq = () => {
+const Faq = ({ faq }) => {
   return (
     <List.Section>
-      <List.Accordion
-        title="Uncontrolled Accordion"
-        style={{ color: "#056ffa", backgroundColor: "white", marginLeft: -15 }}
-        color="#056ffa"
-      >
-        <Text>
-          Zapp Invest is an investing platform where anyone can invest in
-          startups with just INR 5000
-        </Text>
-      </List.Accordion>
-      <List.Accordion
-        title="Uncontrolled Accordion"
-        style={{ color: "#056ffa", backgroundColor: "white", marginLeft: -15 }}
-        color="#056ffa"
-      >
-        <Text>
-          Zapp Invest is an investing platform where anyone can invest in
-          startups with just INR 5000
-        </Text>
-      </List.Accordion>
-      <List.Accordion
-        title="Uncontrolled Accordion"
-        style={{ color: "#056ffa", backgroundColor: "white", marginLeft: -15 }}
-        color="#056ffa"
-      >
-        <Text>
-          Zapp Invest is an investing platform where anyone can invest in
-          startups with just INR 5000
-        </Text>
-      </List.Accordion>
-      <List.Accordion
-        title="Uncontrolled Accordion"
-        style={{ color: "#056ffa", backgroundColor: "white", marginLeft: -15 }}
-        color="#056ffa"
-      >
-        <Text>
-          Zapp Invest is an investing platform where anyone can invest in
-          startups with just INR 5000
-        </Text>
-      </List.Accordion>
+      {faq && faq.map(({faqques, faqans}, index) => {
+        return (
+          <List.Accordion
+            title={faqques}
+            style={{ color: "#056ffa", backgroundColor: "white", marginLeft: -15 }}
+            color="#056ffa"
+            key={index}
+          >
+            <Text>
+              {faqans}
+            </Text>
+          </List.Accordion>
+        )
+      })}
     </List.Section>
   );
 };
 
-const Details = () => {
+const Details = ({ route, navigation }) => {
+  const data = route.params;
   const [pitchButton, setPitchButton] = useState(true);
   const [faqButton, setFaqButton] = useState(false);
   const [teamButton, setTeamButton] = useState(false);
@@ -120,39 +89,40 @@ const Details = () => {
   };
   return (
     // <Screen>
-    <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.backButton}>
+    <ScrollView style = {{backgroundColor: colors.white}}>
+      <View style={styles.container}> 
+        <Text style={styles.backButton} onPress={()=>navigation.goBack()}>
           <MaterialCommunityIcons name="arrow-left" size={16} />
           &nbsp;Back
         </Text>
         <View style={styles.box1}>
           <Image
             style={styles.box1Logo}
-            source={require("../../../assets/gradientWithBG.png")}
+            source={{ uri: data.logo }}
           />
-          <Text style={styles.box1Heading}>Startup Name</Text>
+          <Text style={styles.box1Heading}>{data.startupName || 'ZappInvest'}</Text>
         </View>
         <Text style={styles.description}>
-          Zapp Invest is an investing platform where anyone can invest in
-          startup with just INR 5000
+          {data.description || `Zapp Invest is an investing platform where anyone can invest in
+          startup with just INR 5000`}
         </Text>
         <View style={styles.tagContainer}>
-          <Tag title="Fintech" />
-          <Tag title="B2B" />
-          <Tag title="Investing Platform" />
-          <Tag title="Investing Platform" />
-          <Tag title="Investing Platform" />
+
+          {data && data.category.map((tag, key) => {
+            return (
+              <Tag title={tag} key={key} />
+            )
+          })}
         </View>
 
-        <View style = {{marginTop: 20}}>
+        {/* <View style={{ marginTop: 20 }}>
           <WebView
             javaScriptEnabled={true}
             style={{ width: "100%", height: 250, backgroundColor: "black", borderWidth: 10, }}
             // source={{html: `<iframe width="100%" height="100%" src=${link} title=${movieName}></iframe>`,}}/>
-            source={{ html: `<html><iframe width="100%" height="100%" src="https://www.youtube.com/embed/T3fEF7xg0Vo" frameborder="0" gyroscope; picture-in-picture></iframe></html>` }}
+            source={{ html: `<html><iframe width="100%" height="100%" src=${data.startupYtvideo} frameborder="0" gyroscope; picture-in-picture></iframe></html>` }}
           />
-        </View>
+        </View> */}
 
         <View style={styles.USPSection}>
           <Text style={styles.USPHeading}>USP</Text>
@@ -183,7 +153,7 @@ const Details = () => {
           </View>
         </View>
         <View style={{ marginTop: 15 }}>
-          {[0, 1, 2].map((key, val) => {
+          {[0, 1, 2].map((key) => {
             return (
               <View style={{ marginTop: 10 }} key={key}>
                 <HighLightCard />
@@ -227,8 +197,8 @@ const Details = () => {
 
           <View>
             {/* {pitchButton&& } */}
-            {teamButton && <Team />}
-            {faqButton && <Faq />}
+            {teamButton && <Team team={data.team} />}
+            {faqButton && <Faq faq = {data.faq}/>}
           </View>
         </View>
       </View>

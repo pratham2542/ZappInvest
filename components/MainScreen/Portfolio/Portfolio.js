@@ -1,11 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import PortfioliCard from "../../Cards/PortfolioCard";
+import axios from "axios";
+import {SERVER_URL} from '../../../config/env'
 
 export default Portfolio = ({ navigation }) => {
+  const [firstName, setFirstName] = useState('');
   const [Profit, setProfit] = useState(true);
+  const [investedAmount, setInvestedAmount] = useState('')
+  const [currentAmount, setCurrentAmount] = useState('')
+  const [roi, setRoi] = useState('')
+  useEffect(() => {
+    console.log('Bank detail screen activate');
+    axios.get(`${SERVER_URL}/user/`)
+      .then((res) => {
+        if (res.data) {
+          const { firstName, investedAmount, currentAmount, roi} = res.data;
+          setFirstName(firstName)
+          setInvestedAmount(investedAmount);
+          setCurrentAmount(currentAmount);
+          setRoi(roi);
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+
+  }, [])
   return (
     <ScrollView>
       <View style={{ backgroundColor: "#056ffa", height: 300 }}>
@@ -20,7 +42,7 @@ export default Portfolio = ({ navigation }) => {
           <Icon name="account-circle-outline" size={35} color="white" />
           <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
             {" "}
-            Hi, Pratham
+            {`Hi, ${firstName}`}
           </Text>
         </View>
         <View style={{ marginTop: 15 }}>
@@ -35,7 +57,7 @@ export default Portfolio = ({ navigation }) => {
               marginHorizontal: 25,
             }}
           >
-            ₹ 14,732.5
+            {`₹ ${investedAmount}`}
           </Text>
         </View>
       </View>
@@ -60,7 +82,7 @@ export default Portfolio = ({ navigation }) => {
           <Text style={{ fontSize: 17, fontWeight: "bold" }}>
             Current value
           </Text>
-          <Text style={{ fontSize: 15 }}>₹ 15,000</Text>
+          <Text style={{ fontSize: 15 }}>{`₹ ${currentAmount}`}</Text>
         </View>
         <View
           style={{
@@ -76,11 +98,11 @@ export default Portfolio = ({ navigation }) => {
           </Text>
           {Profit ? (
             <Text style={{ fontSize: 15, fontWeight: "bold", color: "green" }}>
-              15.5%
+              {`${roi || 'Nil'}%`}
             </Text>
           ) : (
             <Text style={{ fontSize: 15, fontWeight: "bold", color: "red" }}>
-              -8.6%
+              {`${roi || "Nil"}%`}
             </Text>
           )}
         </View>

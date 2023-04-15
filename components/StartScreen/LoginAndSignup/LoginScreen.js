@@ -12,33 +12,40 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import { Formik } from 'formik'
 import ErrorMessage from '../../utils/ErrorMessage'
-
-
+import {SERVER_URL} from '../../../config/env'
 function LoginScreen({ navigation, props }) {
   const loginSchema = Yup.object().shape({
     email: Yup.string().trim().required().email(),
     password: Yup.string().trim().required().min(5)
   })
 
-  const handleLogin = async ({email, password}) => {
-    axios.post('http://172.22.30.90:8080/login', { email: email, password: password })
-      .then((res) => {
+  const handleLogin = async ({ email, password }) => {
+    axios.post(`${SERVER_URL}/user/login`, { email: email, password: password })
+      .then(async (res) => {
         console.log(res);
+
+        if (res.data.status > 400 && res.data.status < 500) {
+          console.log(res.data);
+        } else {
+          if(res.data.status===200){
+          }
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: "mainscreen" }],
+            })
+          );
+          try {
+            await AsyncStorage.setItem("loggedin", "true");
+          } catch (e) {
+            console.log("login error");
+          };
+        }
       })
       .catch(e => {
         console.log(e);
       })
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: "mainscreen" }],
-      })
-    );
-    try {
-      await AsyncStorage.setItem("loggedin", "true");
-    } catch (e) {
-      console.log("login error");
-    };
+
   }
 
   return (
@@ -86,7 +93,7 @@ function LoginScreen({ navigation, props }) {
                   name='password'
                   autoCapitalize='none'
                   autoCorrect={false}
-                  textContentType='password'
+                  secureTextEntry
                 />
 
                 {touched['password'] && <ErrorMessage errorMessage={errors.password} />}

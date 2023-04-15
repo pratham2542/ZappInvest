@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Yup from 'yup';
 import { Formik } from 'formik'
 import ErrorMessage from '../../utils/ErrorMessage'
+import {SERVER_URL} from '../../../config/env'
 
 function SignupScreen({ navigation }) {
   const signupSchema = Yup.object().shape({
@@ -22,7 +23,7 @@ function SignupScreen({ navigation }) {
   })
 
   const handleSignup = async ({email, password, firstName, lastName}) => {
-    axios.post('http://172.22.30.90:8080/signup', {
+    axios.post(`${SERVER_URL}/user/signup`, {
       email: email, 
       password: password, 
       firstName: firstName, 
@@ -32,32 +33,32 @@ function SignupScreen({ navigation }) {
       console.log(res.data);
 
       // if success then clearing the stack and adding a token in the local storage
-      // navigation.dispatch(
-      //   CommonActions.reset({
-      //     index: 0,
-      //     routes: [{ name: "mainscreen" }],
-      //   })
-      // );
-      // try {
-      //   await AsyncStorage.setItem("loggedin", "true");
-      // } catch (e) {
-      //   console.log("Signup error");
-      // };
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "mainscreen" }],
+        })
+      );
+      try {
+        await AsyncStorage.setItem("loggedin", "true");
+      } catch (e) {
+        console.log("Signup error");
+      };
     })
     .catch(e=>{
       console.log(e);
     })
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: "mainscreen" }],
-      })
-    );
-    try {
-      await AsyncStorage.setItem("loggedin", "true");
-    } catch (e) {
-      console.log("Signup error");
-    };
+    // navigation.dispatch(
+    //   CommonActions.reset({
+    //     index: 0,
+    //     routes: [{ name: "mainscreen" }],
+    //   })
+    // );
+    // try {
+    //   await AsyncStorage.setItem("loggedin", "true");
+    // } catch (e) {
+    //   console.log("Signup error");
+    // };
 
   }
 
@@ -137,6 +138,7 @@ function SignupScreen({ navigation }) {
                   autoCapitalize='none'
                   autoCorrect={false}
                   textContentType='password'
+                  secureTextEntry
                    />
                   {touched['password'] && <ErrorMessage errorMessage={errors.password}/>}
                   
