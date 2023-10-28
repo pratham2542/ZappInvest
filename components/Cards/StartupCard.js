@@ -23,8 +23,11 @@ const CreateCard = ({ data, handlePress }) => {
     return null;
   }
   const image = {
-    uri: data.image,
+    uri: data.image
   };
+  const logo = {
+    uri : data.logo
+  }
 
   return (
     <Card mode="outlined" style={styles.card} onPress={handlePress}>
@@ -45,7 +48,7 @@ const CreateCard = ({ data, handlePress }) => {
       <View style={{ padding: 15 }}>
         <View style={{ flexDirection: "row" }}>
           <ImageBackground
-            source={require("../../assets/review.png")}
+            source={logo}
             style={styles.icon}
           ></ImageBackground>
           <View
@@ -54,7 +57,7 @@ const CreateCard = ({ data, handlePress }) => {
               alignItems: "center",
             }}
           >
-            <Text style={styles.title}>{data.name}</Text>
+            <Text style={styles.title}>{data.startupName}</Text>
           </View>
         </View>
         <View>
@@ -76,7 +79,7 @@ const CreateCard = ({ data, handlePress }) => {
             </Text>
             <Text
               style={{ fontWeight: "bold", fontSize: 15 }}
-            >{`${data.raised} %`}</Text>
+            >{`22%`}</Text>
           </View>
           <View style={{ alignItems: "flex-end" }}>
             <Text
@@ -86,7 +89,7 @@ const CreateCard = ({ data, handlePress }) => {
             </Text>
             <Text
               style={{ fontWeight: "bold", fontSize: 15 }}
-            >{`₹ ${data.minimum}`}</Text>
+            >{`₹5000`}</Text>
           </View>
         </View>
         <View
@@ -97,10 +100,10 @@ const CreateCard = ({ data, handlePress }) => {
             marginTop: 2.5,
           }}
         >
-          {data.tags.map((key, x) => {
+          {data && data.category.map((key, x) => {
             return (
               <Text key={key} style={styles.tag}>
-                {data.tags[x]}
+                {data.category[x]}
               </Text>
             );
           })}

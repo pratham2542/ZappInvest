@@ -13,14 +13,16 @@ import { Formik } from 'formik'
 import ErrorMessage from '../../utils/ErrorMessage'
 
 
-const StartupFormScreen = () => {
+const StartupFormScreen = ({navigation}) => {
     const startupSchema = Yup.object().shape({
         email: Yup.string().trim().required().email(),
         password: Yup.string().trim().required().min(5)
       })
     
     const handleBackButton = () => {
-        console.log("Back button in the startup form screen clicked")
+        // console.log("")
+        navigation.goBack();
+
     }
     const handleRegistrationButton = () => {
         console.log('Registration button called')
