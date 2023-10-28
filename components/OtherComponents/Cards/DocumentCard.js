@@ -24,7 +24,7 @@ const DocumentCard = () => {
             }}
           >
             <ImageBackground
-              source={require("../../assets/gradientWithBG.png")}
+              source={require("../../../assets/gradientWithBG.png")}
               style={styles.cover}
               resizeMode={"contain"}
               borderRadius={10}

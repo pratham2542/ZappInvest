@@ -2,23 +2,14 @@ import { Image, ScrollView, StyleSheet, Text, View, Dimensions } from "react-nat
 import React, { useState } from "react";
 import colors from "../../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Tag from "../../utils/Tag";
-import USPCard from "../../Cards/USPCard";
-import DocumentCard from "../../Cards/DocumentCard";
-import TeamMemberCard from "../../Cards/TeamMemberCard";
-import HighLightCard from "../../Cards/HighLightCard";
+import Tag from "../../../components/utils/Tag";
+import USPCard from "../../../components/OtherComponents/Cards/USPCard";
+import DocumentCard from "../../../components/OtherComponents/Cards/DocumentCard";
+import TeamMemberCard from "../../../components/OtherComponents/Cards/TeamMemberCard";
+import HighLightCard from "../../../components/OtherComponents/Cards/HighLightCard";
 import { List } from "react-native-paper";
 import WebView from 'react-native-webview';
 
-
-// const pitch = () => {
-//   const source = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
-//   return(
-//     <>
-
-//     </>
-//     );
-// }
 
 const Team = ({ team }) => {
   return (

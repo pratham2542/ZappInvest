@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, TouchableHighlight } from 'react-native';
-import ProfilePageBox from '../../utils/ProfilePageBox';
+import ProfilePageBox from '../../../components/utils/ProfilePageBox';
 import { AntDesign } from '@expo/vector-icons';
 import colors from '../../../config/colors';
 import { CommonActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from 'axios';
 import { SERVER_URL } from '../../../config/env'
+import routes from '../../../routes/routes';
 
 
 
@@ -17,7 +18,7 @@ const ProfileScreen = ({ navigation }) => {
   const [pic, setPic] = useState('');
   useEffect(() => {
     console.log('Bank detail screen activate');
-    axios.get(`${SERVER_URL}/user/`)
+    axios.get(routes.userRoute)
       .then((res) => {
         if (res.data) {
           const { pic, firstName, lastName, email } = res.data;

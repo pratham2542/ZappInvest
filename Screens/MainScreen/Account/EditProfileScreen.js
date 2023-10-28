@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-import Screen from '../Screen';
+import Screen from '../../../components/utils/Screen';
 import colors from '../../../config/colors';
-import AppButton from '../../utils/AppButton';
+import AppButton from '../../../components/utils/AppButton';
 import axios from 'axios';
 import { SERVER_URL } from '../../../config/env'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import routes from '../../../routes/routes';
 
 
 const EditProfileScreen = ({navigation}) => {
@@ -17,7 +18,7 @@ const EditProfileScreen = ({navigation}) => {
 
   useEffect(() => {
     console.log('Bank detail screen activate');
-    axios.get(`${SERVER_URL}/user/`)
+    axios.get(routes.userRoute)
       .then((res) => {
         if (res.data) {
           const { firstName, lastName, email, address, mobile } = res.data;

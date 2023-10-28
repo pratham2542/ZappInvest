@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import PortfioliCard from "../../Cards/PortfolioCard";
+import PortfioliCard from "../../../components/OtherComponents/Cards/PortfolioCard";
 import axios from "axios";
 import {SERVER_URL} from '../../../config/env'
+import routes from '../../../routes/routes';
 
 export default Portfolio = ({ navigation }) => {
   const [firstName, setFirstName] = useState('');
@@ -14,7 +15,7 @@ export default Portfolio = ({ navigation }) => {
   const [roi, setRoi] = useState('')
   useEffect(() => {
     console.log('Bank detail screen activate');
-    axios.get(`${SERVER_URL}/user/`)
+    axios.get(routes.userRoute)
       .then((res) => {
         if (res.data) {
           const { firstName, investedAmount, currentAmount, roi} = res.data;

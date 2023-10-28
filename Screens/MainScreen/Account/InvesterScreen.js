@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableWithoutFeedback,Image } from 'react-native';
-import Screen from '../Screen';
+import Screen from '../../../components/utils/Screen';
 import { useNavigation } from '@react-navigation/native';
 
 const LineSeparator = () => {

@@ -15,7 +15,7 @@ const CreateCard = () => {
     >
       <View style={{ borderRadius: 15 }}>
         <ImageBackground
-          source={require("../../assets/uper.jpeg")}
+          source={require("../../../assets/uper.jpeg")}
           imageStyle={{
             borderRadius: 15,
             borderBottomRightRadius: 35,
@@ -39,7 +39,7 @@ const CreateCard = () => {
       </View>
 
       <ImageBackground
-        source={require("../../assets/lower.jpeg")}
+        source={require("../../../assets/lower.jpeg")}
         imageStyle={{
           width: "100%",
           borderRadius: 15,
