@@ -1,16 +1,16 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import Screen from '../Screen'
+import Screen from '../../../components/utils/Screen'
 import colors from '../../../config/colors'
-import AppTextInput from '../../utils/AppTextInput'
-import AppButton from '../../utils/AppButton'
+import AppTextInput from '../../../components/utils/AppTextInput'
+import AppButton from '../../../components/utils/AppButton'
 import * as DocumentPicker from 'expo-document-picker';
-import AppUploadField from '../../utils/AppUploadField'
+import AppUploadField from '../../../components/utils/AppUploadField'
 import * as ImagePicker from 'expo-image-picker';
 import * as Yup from 'yup';
 import { Formik } from 'formik'
-import ErrorMessage from '../../utils/ErrorMessage'
+import ErrorMessage from '../../../components/utils/ErrorMessage'
 
 
 const StartupFormScreen = ({navigation}) => {

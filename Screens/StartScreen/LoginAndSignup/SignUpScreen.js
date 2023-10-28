@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import colors from "../../../config/colors";
-import AppButton from "../../utils/AppButton"
-import GoogleCard from "../../Cards/GoogleCard";
+import AppButton from "../../../components/utils/AppButton"
+import GoogleCard from "../../../components/OtherComponents/Cards/GoogleCard";
 import TextLineSeperator from "./TextLineSeperator";
-import AppTextInput from "../../utils/AppTextInput";
-import Screen from "../../MainScreen/Screen";
+import AppTextInput from "../../../components/utils/AppTextInput";
+import Screen from "../../../components/utils/Screen";
 import axios from 'axios';
 import { CommonActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Yup from 'yup';
 import { Formik } from 'formik'
-import ErrorMessage from '../../utils/ErrorMessage'
+import ErrorMessage from '../../../components/utils/ErrorMessage'
 import {SERVER_URL} from '../../../config/env'
+import routes from '../../../routes/routes';
 
 function SignupScreen({ navigation }) {
   const signupSchema = Yup.object().shape({
@@ -23,7 +24,8 @@ function SignupScreen({ navigation }) {
   })
 
   const handleSignup = async ({email, password, firstName, lastName}) => {
-    axios.post(`${SERVER_URL}/user/signup`, {
+    console.log(SERVER_URL);
+    axios.post(routes.signUpRoute, {
       email: email, 
       password: password, 
       firstName: firstName, 

@@ -1,15 +1,14 @@
-import { View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Deals from "./Deals/Deals";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Portfolio from"./Portfolio/Portfolio";
-import Home from "./Home/HomeScreen";
-import Account from "./Account/ProfileScreen";
+import Deals from "../Screens/MainScreen/Deals/Deals";
+import Portfolio from"../Screens/MainScreen/Portfolio/Portfolio";
+import Home from "../Screens/MainScreen/Home/HomeScreen";
+import Account from "../Screens/MainScreen/Account/ProfileScreen";
 
 
 const Tab = createBottomTabNavigator();
 
-export default Mainscreen = () => {
+export default Tabnavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

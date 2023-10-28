@@ -2,17 +2,17 @@ import { View, Text, StyleSheet, ScrollView,Image } from 'react-native'
 import React from 'react'
 import colors from '../../../config/colors'
 import { MaterialCommunityIcons,MaterialIcons } from '@expo/vector-icons'
-import StartupCard from '../../Cards/StartupCard'
-import CardCarousel from "../../Cards/CardCarousel"
+import StartupCard from '../../../components/OtherComponents/Cards/StartupCard'
+import CardCarousel from "../../../components/OtherComponents/Cards/CardCarousel"
 import Data from "../Deals/StartUpCardData";
-import LearnCard from '../../Cards/LearnCard'
-import Screen from '../Screen'
-import AppButton from '../../utils/AppButton'
+import LearnCard from '../../../components/OtherComponents/Cards/LearnCard'
+import Screen from '../../../components/utils/Screen'
+import AppButton from '../../../components/utils/AppButton'
 import { Octicons } from '@expo/vector-icons'; 
 
 const HomeScreen = ({navigation}) => {
   return (
-      <Screen>
+      // <Screen>
       <View style = {styles.container}>
         <ScrollView>
           <View style = {styles.section1}>
@@ -89,7 +89,7 @@ const HomeScreen = ({navigation}) => {
           </View>
         </ScrollView>
       </View>
-      </Screen>
+      // </Screen>
     
   )
 }

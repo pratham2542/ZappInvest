@@ -1,14 +1,14 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "../components/StartScreen/LoginAndSignup/LoginScreen";
-import Signupscreen from "../components/StartScreen/LoginAndSignup/SignUpScreen";
-import Slider from "../components/StartScreen/SliderComponent/components/slider";
-import Details from "../components/MainScreen/Deals/Details";
-import Mainscreen from "../components/MainScreen/Mainscreen";
-import EditProfileScreen from "../components/MainScreen/Account/EditProfileScreen";
-import BankDetailScreen from "../components/MainScreen/Account/BankDetailsScreen";
-import InvestorScreen from "../components/MainScreen/Account/InvesterScreen";
-import DetailsInvestorScreen from "../components/MainScreen/Account/DetaiIInvestorScreen";
-import StartupFormScreen from '../components/MainScreen/Account/StartupFormScreen'
+import LoginScreen from "../Screens/StartScreen/LoginAndSignup/LoginScreen";
+import Signupscreen from "../Screens/StartScreen/LoginAndSignup/SignUpScreen";
+import Slider from "../Screens/StartScreen/SliderComponent/components/slider";
+import Details from "../Screens/MainScreen/Deals/Details";
+import Mainscreen from "../Screens/MainScreen/Mainscreen";
+import EditProfileScreen from "../Screens/MainScreen/Account/EditProfileScreen";
+import BankDetailScreen from "../Screens/MainScreen/Account/BankDetailsScreen";
+import InvestorScreen from "../Screens/MainScreen/Account/InvesterScreen";
+import DetailsInvestorScreen from "../Screens/MainScreen/Account/DetaiIInvestorScreen";
+import StartupFormScreen from '../Screens/MainScreen/Account/StartupFormScreen'
 const Stack = createStackNavigator();
 
 stack1 = () => {

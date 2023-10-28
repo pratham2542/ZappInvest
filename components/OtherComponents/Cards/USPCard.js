@@ -19,7 +19,7 @@ const USPCard = () => {
   return (
     <Card style={styles.card}>
       <Card.Content>
-        <Image source={require("../../assets/gradientWithBG.png")} style = {styles.image}/>
+        <Image source={require("../../../assets/gradientWithBG.png")} style = {styles.image}/>
         <Title style={styles.title}>Reviews</Title>
         <Paragraph style={styles.description}>
           40% repeat rates & 79% products have 4+ Star Reviews| 93000 Reviews

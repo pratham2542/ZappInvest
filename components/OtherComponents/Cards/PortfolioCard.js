@@ -10,7 +10,7 @@ const USPCard = ({profit}) => {
     <Card style={styles.card}>
       <View style={{ margin: 15, flexDirection: "row", alignItems: "center" }}>
         <Image
-          source={require("../../assets/gradientWithBG.png")}
+          source={require("../../../assets/gradientWithBG.png")}
           style={styles.image}
         />
         <Title style={styles.title}>Reviews</Title>

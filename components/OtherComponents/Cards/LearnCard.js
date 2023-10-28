@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import colors from '../../config/colors';
+import colors from '../../../config/colors';
 
 const LearnCard = ({title = "this is title", description = "this is description", btnname = "Learn", backgroundColor =  colors.lightGrey}, onPress) => {
   return (
@@ -14,7 +14,7 @@ const LearnCard = ({title = "this is title", description = "this is description"
       </View>
       <View></View>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={require("../../assets/edit.png")} />
+        <Image style={styles.image} source={require("../../../assets/edit.png")} />
       </View>
     </View>
   );
