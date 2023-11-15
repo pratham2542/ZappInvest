@@ -186,7 +186,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View style={{ backgroundColor: "rgba(64, 164, 255, 0.063)" }}>
+      <View style={{ backgroundColor: "rgba(64, 164, 255, 0.183)" }}>
         <View style={{ paddingVertical: 30 }}>
           <View style={{ alignItems: "center" }}>
             <Text

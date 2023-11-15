@@ -38,7 +38,7 @@ export default Tabnavigator = () => {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Portfolio" component={Portfolio} />
-      <Tab.Screen name="Deals" component={Deals} />
+      <Tab.Screen name="Deals" component={Screen2} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
