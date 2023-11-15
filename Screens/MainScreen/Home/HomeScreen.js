@@ -19,7 +19,7 @@ const HomeScreen = ({navigation}) => {
               <View style = {styles.section1Container1}>
                 <Text style = {{color : colors.white, fontSize : 36, fontWeight: '900', textAlign: 'center'}}>ZappInvest</Text>
                 <Text style = {{color : colors.white, fontSize : 14, fontWeight: '500', textAlign: 'center'}}>Place where best startup raise {"\n"}for their community</Text>
-                <View style = {{flexDirection : 'row', justifyContent: 'space-evenly'}}>
+                <View style = {{flexDirection : 'row', justifyContent: 'space-evenly',marginVertical:15}}>
                   <AppButton width='45%' title = "Register startup" onPress= {()=>navigation.navigate("startupForm")} />
                   <AppButton width='45%' title = "Explore deals" onPress= {()=>navigation.navigate("Deals")}/>
                 </View>

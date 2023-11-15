@@ -4,6 +4,9 @@ import Deals from "../Screens/MainScreen/Deals/Deals";
 import Portfolio from"../Screens/MainScreen/Portfolio/Portfolio";
 import Home from "../Screens/MainScreen/Home/HomeScreen";
 import Account from "../Screens/MainScreen/Account/ProfileScreen";
+import Screen1 from "../Screens/MainScreen/prathamscreens/screen1";
+import Screen2 from "../Screens/MainScreen/prathamscreens/screen2";
+
 
 
 const Tab = createBottomTabNavigator();

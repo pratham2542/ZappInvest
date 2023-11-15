@@ -65,11 +65,14 @@ const HomeScreen = ({ navigation }) => {
             One stop platform for all startup investment. Invest, exit and stay
             connected with startups on same platform
           </Text>
+          <View style={{marginVertical:10}}>
           <AppButton
             width="45%"
             title="Get Started"
             onPress={() => navigation.navigate("startupForm")}
           />
+          </View>
+          
         </View>
         <View style={{ alignItems: "center" }}>
           <Image
@@ -124,11 +127,14 @@ const HomeScreen = ({ navigation }) => {
         <Text style={{ marginBottom: 10, fontSize: 15 }}>
           In Highly-Vetted Startups
         </Text>
+        <View style={{marginVertical:10}}>
         <AppButton
           width="45%"
           title="Get Started"
           onPress={() => navigation.navigate("startupForm")}
         />
+        </View>
+       
       </View>
       <View>
         <Image
@@ -171,7 +177,7 @@ const HomeScreen = ({ navigation }) => {
       </View>
 
 
-        <View style={{ alignItems: "center", margin: 15 }}>
+        <View style={{ alignItems: "center", marginVertical: 25 }}>
           <AppButton
             width="55%"
             title="Discover Startups"
