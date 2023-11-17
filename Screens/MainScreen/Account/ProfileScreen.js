@@ -56,6 +56,22 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate("startupForm");
     console.log("Clicked");
   };
+  const startupProfile = () => {
+    navigation.navigate("startupProfile");
+    console.log("Clicked");
+  };
+  const startupTeam = () => {
+    navigation.navigate("startupTeam");
+    console.log("Clicked");
+  };
+  const startupFaq = () => {
+    navigation.navigate("startupFaq");
+    console.log("Clicked");
+  };
+  const startupEntity = () => {
+    navigation.navigate("startupEntity");
+    console.log("Clicked");
+  };
   const logout = async() => {
     axios.get(`${SERVER_URL}/user/logout`)
       .catch(error=>console.log(error));
@@ -95,11 +111,15 @@ const ProfileScreen = ({ navigation }) => {
       </View>
       <ProfilePageBox name="account-edit" heading="Edit Details" size={50} iconColor="black" onPress={accountEdit} />
       <ProfilePageBox name="bank" heading="Bank Details" size={50} iconColor="black" onPress={bank} />
-      <ProfilePageBox name="contacts" heading="Contact Us" size={50} iconColor="black" onPress={contacts} />
-      <ProfilePageBox name="security" heading="Privacy Policy" size={50} iconColor="black" onPress={security} />
-      <ProfilePageBox name="notebook-check-outline" heading="Terms And Conditions" size={50} iconColor="black" onPress={notebookCheckOutline} />
-      <ProfilePageBox name="notebook" heading="Register startup" size={50} iconColor="black" onPress={startupForm} />
+      {/* <ProfilePageBox name="contacts" heading="Contact Us" size={50} iconColor="black" onPress={contacts} /> */}
+      {/* <ProfilePageBox name="security" heading="Privacy Policy" size={50} iconColor="black" onPress={security} /> */}
+      {/* <ProfilePageBox name="notebook-check-outline" heading="Terms And Conditions" size={50} iconColor="black" onPress={notebookCheckOutline} /> */}
+      {/* <ProfilePageBox name="notebook" heading="Register startup" size={50} iconColor="black" onPress={startupForm} /> */}
       <ProfilePageBox name="logout" heading="logout" size={50} iconColor="black" onPress={logout} />
+      <ProfilePageBox name="logout" heading="Startup Profile" size={50} iconColor="black" onPress={startupProfile} />
+      <ProfilePageBox name="logout" heading="Startup Team" size={50} iconColor="black" onPress={startupTeam} />
+      <ProfilePageBox name="logout" heading="Startup Faq" size={50} iconColor="black" onPress={startupFaq} />
+      <ProfilePageBox name="logout" heading="Startup Entity" size={50} iconColor="black" onPress={startupEntity} />
     </ScrollView>
 
   );

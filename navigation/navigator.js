@@ -9,6 +9,10 @@ import BankDetailScreen from "../Screens/MainScreen/Account/BankDetailsScreen";
 import InvestorScreen from "../Screens/MainScreen/Account/InvesterScreen";
 import DetailsInvestorScreen from "../Screens/MainScreen/Account/DetaiIInvestorScreen";
 import StartupFormScreen from '../Screens/MainScreen/Account/StartupFormScreen'
+import StartupProfileScreen from "../Screens/StartupDashboard/StartupProfileScreen";
+import StartupTeamDetails from "../Screens/StartupDashboard/StartupTeamDetails";
+import StartupFaqDetails from "../Screens/StartupDashboard/StartupFaqDetails";
+import StartupEntityDetails from "../Screens/StartupDashboard/StartupEntityDetails";
 const Stack = createStackNavigator();
 
 stack1 = () => {
@@ -28,6 +32,10 @@ stack1 = () => {
       <Stack.Screen name="investor" component={InvestorScreen} />
       <Stack.Screen name="investordetails" component={DetailsInvestorScreen}/>
       <Stack.Screen name="startupForm" component={StartupFormScreen}/>
+      <Stack.Screen name="startupProfile" component={StartupProfileScreen}/>
+      <Stack.Screen name="startupTeam" component={StartupTeamDetails}/>
+      <Stack.Screen name="startupFaq" component={StartupFaqDetails}/>
+      <Stack.Screen name="startupEntity" component={StartupEntityDetails}/>
     </Stack.Navigator>
   );
 };

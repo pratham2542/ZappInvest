@@ -12,7 +12,7 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import { Formik } from 'formik'
 import ErrorMessage from '../../../components/utils/ErrorMessage'
-import {SERVER_URL} from '../../../config/env'
+import { SERVER_URL } from '../../../config/env'
 import routes from '../../../routes/routes';
 
 
@@ -23,116 +23,128 @@ function LoginScreen({ navigation, props }) {
   })
 
   const handleLogin = async ({ email, password }) => {
-    axios.post(routes.loginRoute, { email: email, password: password })
-      .then(async (res) => {
-        console.log(res);
-
-        if (res.data.status > 400 && res.data.status < 500) {
-          console.log(res.data);
-        } else {
-          if(res.data.status===200){
-          }
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: "mainscreen" }],
-            })
-          );
-          try {
-            await AsyncStorage.setItem("loggedin", "true");
-          } catch (e) {
-            console.log("login error");
-          };
-        }
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: "mainscreen" }],
       })
-      .catch(e => {
-        console.log(e);
-      })
-
+    );
+    try {
+      await AsyncStorage.setItem("loggedin", "true");
+    } catch (e) {
+      console.log("login error");
+    };
   }
+  // axios.post(routes.loginRoute, { email: email, password: password })
+  //   .then(async (res) => {
+  //     console.log(res);
 
-  return (
-    <Screen style={styles.screen}>
-      <View style={{ alignItems: "center" }}>
-        <Text style={styles.heading}>Log in</Text>
-      </View>
-      {/* <View style={{ marginHorizontal: 10 }}>
+  //     if (res.data.status > 400 && res.data.status < 500) {
+  //       console.log(res.data);
+  //     } else {
+  //       if(res.data.status===200){
+  //       }
+  //       navigation.dispatch(
+  //         CommonActions.reset({
+  //           index: 0,
+  //           routes: [{ name: "mainscreen" }],
+  //         })
+  //       );
+  //       try {
+  //         await AsyncStorage.setItem("loggedin", "true");
+  //       } catch (e) {
+  //         console.log("login error");
+  //       };
+  //     }
+  //   })
+  //   .catch(e => {
+  //     console.log(e);
+  //   })
+
+// }
+
+return (
+  <Screen style={styles.screen}>
+    <View style={{ alignItems: "center" }}>
+      <Text style={styles.heading}>Log in</Text>
+    </View>
+    {/* <View style={{ marginHorizontal: 10 }}>
         <GoogleCard name={"google"} />
       </View>
       <TextLineSeperator text={"OR LOG IN WITH EMAIL"} /> */}
 
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        onSubmit={(values) => handleLogin(values)}
-        validationSchema={loginSchema}
-      >
-        {({ values, handleChange, handleSubmit, errors, touched, setFieldTouched }) => {
-          return (
-            <>
-              <View style={{ marginHorizontal: 20, flexDirection: "column" }}>
-                <AppTextInput
-                  placeholder={"Enter email"}
-                  value={values.email}
-                  handleChange={handleChange}
-                  touched={touched}
-                  errors={errors}
-                  onBlur={() => setFieldTouched('email')}
-                  name='email'
-                  autoCapitalize='none'
-                  keyboardType='email-address'
-                  autoCorrect={false}
-                  textContentType='emailAddress' // only work with ios ....used to automatically add the password stored in auto fill
-                />
-                {touched['email'] && <ErrorMessage errorMessage={errors.email} />}
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      onSubmit={(values) => handleLogin(values)}
+      validationSchema={loginSchema}
+    >
+      {({ values, handleChange, handleSubmit, errors, touched, setFieldTouched }) => {
+        return (
+          <>
+            <View style={{ marginHorizontal: 20, flexDirection: "column" }}>
+              <AppTextInput
+                placeholder={"Enter email"}
+                value={values.email}
+                handleChange={handleChange}
+                touched={touched}
+                errors={errors}
+                onBlur={() => setFieldTouched('email')}
+                name='email'
+                autoCapitalize='none'
+                keyboardType='email-address'
+                autoCorrect={false}
+                textContentType='emailAddress' // only work with ios ....used to automatically add the password stored in auto fill
+              />
+              {touched['email'] && <ErrorMessage errorMessage={errors.email} />}
 
 
-                <AppTextInput
-                  placeholder={"Enter password"}
-                  value={values.password}
-                  handleChange={handleChange}
-                  touched={touched}
-                  errors={errors}
-                  onBlur={() => setFieldTouched('password')}
-                  name='password'
-                  autoCapitalize='none'
-                  autoCorrect={false}
-                  secureTextEntry
-                />
+              <AppTextInput
+                placeholder={"Enter password"}
+                value={values.password}
+                handleChange={handleChange}
+                touched={touched}
+                errors={errors}
+                onBlur={() => setFieldTouched('password')}
+                name='password'
+                autoCapitalize='none'
+                autoCorrect={false}
+                secureTextEntry
+              />
 
-                {touched['password'] && <ErrorMessage errorMessage={errors.password} />}
+              {touched['password'] && <ErrorMessage errorMessage={errors.password} />}
 
-                <Text style={styles.lightText}>By continuing you agree to our <Text style={styles.impText}>Terms & Conditions</Text><Text style={styles.lightText}> and</Text>{" "}<Text style={styles.impText}>Privacy Policy</Text></Text>
-                <AppButton
-                  title={"Login"}
-                  onPress={handleSubmit}
-                />
-              </View>
-            </>
-          )
+              <Text style={styles.lightText}>By continuing you agree to our <Text style={styles.impText}>Terms & Conditions</Text><Text style={styles.lightText}> and</Text>{" "}<Text style={styles.impText}>Privacy Policy</Text></Text>
+              <AppButton
+                title={"Login"}
+                onPress={handleSubmit}
+              />
+            </View>
+          </>
+        )
+      }}
+    </Formik>
+
+    <View style={styles.loginButton}>
+      <View
+        style={{
+          alignItems: "center",
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 10,
         }}
-      </Formik>
-
-      <View style={styles.loginButton}>
-        <View
-          style={{
-            alignItems: "center",
-            flexDirection: "row",
-            justifyContent: "center",
-            marginTop: 10,
+      >
+        <Text style={styles.lightText}> Don't have Account?</Text>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("signup");
           }}
         >
-          <Text style={styles.lightText}> Don't have Account?</Text>
-          <Pressable
-            onPress={() => {
-              navigation.navigate("signup");
-            }}
-          >
-            <Text style={styles.impText}>Sign up instead </Text>
-          </Pressable>
-        </View>
+          <Text style={styles.impText}>Sign up instead </Text>
+        </Pressable>
       </View>
-    </Screen>
-  );
+    </View>
+  </Screen>
+);
 }
 const styles = StyleSheet.create({
   screen: {
