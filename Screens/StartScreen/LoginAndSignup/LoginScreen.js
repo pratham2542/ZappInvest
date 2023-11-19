@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import colors from "../../../config/colors";
 import AppButton from "../../../components/utils/AppButton"
@@ -12,44 +12,116 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import { Formik } from 'formik'
 import ErrorMessage from '../../../components/utils/ErrorMessage'
-import {SERVER_URL} from '../../../config/env'
+import { SERVER_URL } from '../../../config/env'
 import routes from '../../../routes/routes';
-
+import AuthContext from "../../../contexts/AuthContext";
+import InvestorAuthAPI from '../../../API/InvestorAuthAPI'
 
 function LoginScreen({ navigation, props }) {
+  const authContext = useContext(AuthContext);
   const loginSchema = Yup.object().shape({
     email: Yup.string().trim().required().email(),
     password: Yup.string().trim().required().min(5)
   })
 
-  const handleLogin = async ({ email, password }) => {
-    axios.post(routes.loginRoute, { email: email, password: password })
-      .then(async (res) => {
-        console.log(res);
 
-        if (res.data.status > 400 && res.data.status < 500) {
-          console.log(res.data);
-        } else {
-          if(res.data.status===200){
-          }
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: "mainscreen" }],
-            })
-          );
-          try {
-            await AsyncStorage.setItem("loggedin", "true");
-          } catch (e) {
-            console.log("login error");
-          };
+  // verify form data
+  const verifyFormData = (email, password) => {
+    if (email === "" || password === "") {
+        return {
+            valid: false,
+            message: "All fields are required",
+        };
+    } else if (password.length < 8) {
+        return {
+            valid: false,
+            message: "Password must be at least 8 characters long",
+        };
+    }
+
+    return {
+        valid: true,
+    };
+};
+
+//  new login handler
+  const handleLogin = async ({email, password}) => {
+    const verify = verifyFormData(email, password);
+    if (verify.valid === false) {
+      console.log("ERROR: ",verify.message);
+    } else {
+        try {
+            const { data } = await axios.post(
+                InvestorAuthAPI.INVESTOR_LOGIN,
+                { email, password }
+                // { validateStatus: false, withCredentials: true }
+            );
+            if (data.status === 200) {
+                console.log('DATA in Login : ', data); // comment
+                authContext.login(data.token, data.user);
+                navigation.dispatch(
+                      CommonActions.reset({
+                        index: 0,
+                        routes: [{ name: "mainscreen" }],
+                      })
+                    );
+                    try {
+                      await AsyncStorage.setItem("loggedin", "true");
+                    } catch (e) {
+                      console.log("login error");
+                    };
+
+            } else {
+                console.log(data.message)
+            }
+        } catch (error) {
+            console.log(error);
         }
-      })
-      .catch(e => {
-        console.log(e);
-      })
+    }
+};
 
-  }
+// old login handler
+
+  // const handleLogin = async ({ email, password }) => {
+  //   navigation.dispatch(
+  //     CommonActions.reset({
+  //       index: 0,
+  //       routes: [{ name: "mainscreen" }],
+  //     })
+  //   );
+  //   try {
+  //     await AsyncStorage.setItem("loggedin", "true");
+  //   } catch (e) {
+  //     console.log("login error");
+  //   };
+
+    // axios.post(routes.loginRoute, { email: email, password: password })
+    //   .then(async (res) => {
+    //     console.log(res);
+
+    //     if (res.data.status > 400 && res.data.status < 500) {
+    //       console.log(res.data);
+    //     } else {
+    //       if(res.data.status===200){
+    //       }
+    //       navigation.dispatch(
+    //         CommonActions.reset({
+    //           index: 0,
+    //           routes: [{ name: "mainscreen" }],
+    //         })
+    //       );
+    //       try {
+    //         await AsyncStorage.setItem("loggedin", "true");
+    //       } catch (e) {
+    //         console.log("login error");
+    //       };
+    //     }
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   })
+
+  // }
 
   return (
     <Screen style={styles.screen}>
