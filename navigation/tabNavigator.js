@@ -6,12 +6,16 @@ import Home from "../Screens/MainScreen/Home/HomeScreen";
 import Account from "../Screens/MainScreen/Account/ProfileScreen";
 import Screen1 from "../Screens/MainScreen/prathamscreens/screen1";
 import Screen2 from "../Screens/MainScreen/prathamscreens/screen2";
-
-
+import AuthContext from "../contexts/AuthContext";
+import {useContext} from "react";
 
 const Tab = createBottomTabNavigator();
 
 export default Tabnavigator = () => {
+
+  const authContext = useContext(AuthContext);
+  const role = authContext.role;
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -25,7 +29,7 @@ export default Tabnavigator = () => {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Account") {
             iconName = focused ? "person" : "person-outline";
-          } else if (route.name === "Deals") {
+          } else if (route.name === "Deals"|| route.name === "Startups") {
             iconName = focused ? "ios-list" : "ios-list-outline";
           } else if (route.name === "Portfolio") {
             iconName = focused ? "cash" : "cash-outline";
@@ -36,9 +40,9 @@ export default Tabnavigator = () => {
         tabBarInactiveTintColor: "grey",
       })}
     >
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home" component={role=="investor"?Screen1:Screen2} />
       <Tab.Screen name="Portfolio" component={Portfolio} />
-      <Tab.Screen name="Deals" component={Screen2} />
+      <Tab.Screen name={role=="investor"?"Deals":"Startups"} component={Deals} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
