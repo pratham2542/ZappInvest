@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications'
 import ToastMessage from './components/utils/ToastMessage';
+import AuthContext, { AuthContextProvider } from './contexts/AuthContext';
 
 SplashScreen.preventAutoHideAsync()
   .then(result => console.log(`succeeded: ${result}`))
@@ -27,15 +28,17 @@ export default function App() {
 
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ToastProvider>
-        <View style={styles.container}>
-          <NavigationContainer>
-            <Stack1 />
-          </NavigationContainer>
-        </View>
-      </ToastProvider>
-    </SafeAreaView>
+    <AuthContextProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ToastProvider>
+          <View style={styles.container}>
+            <NavigationContainer>
+              <Stack1 />
+            </NavigationContainer>
+          </View>
+        </ToastProvider>
+      </SafeAreaView>
+    </AuthContextProvider>
   );
 }
 

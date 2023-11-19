@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import routes from '../../../routes/routes';
 
 
-const EditProfileScreen = ({navigation}) => {
+const EditProfileScreen = ({ navigation }) => {
   const [name, setName] = useState('John Doe');
   const [email, setEmail] = useState('johndoe@gmail.com');
   const [mobile, setMobile] = useState('');
@@ -52,9 +52,9 @@ const EditProfileScreen = ({navigation}) => {
   return (
     <View style={{ backgroundColor: "white", flex: 1, justifyContent: "center" }}>
       <Text style={styles.backButton} onPress={() => navigation.goBack()}>
-          <MaterialCommunityIcons name="arrow-left" size={16} />
-          &nbsp;Back
-        </Text>
+        <MaterialCommunityIcons name="arrow-left" size={16} />
+        &nbsp;Back
+      </Text>
       <ScrollView style={{ marginTop: 150 }}>
         <View style={{ margin: 20, backgroundColor: "white" }}>
           <Text style={styles.title}>Edit Details</Text>
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     position: 'absolute',
     top: 30,
-    left : 15,
+    left: 15,
   },
 })
 

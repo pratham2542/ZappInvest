@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import colors from '../../config/colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import EditModal from '../../components/utils/EditModal';
@@ -8,7 +8,9 @@ import GenerateRandomId from '../../config/GenerateRandomId';
 import * as Yup from 'yup';
 import { Formik } from 'formik'
 import AppButton from '../../components/utils/AppButton';
-
+import axios from 'axios';
+import StartupDashboardAPI from '../../API/StartupDashboardAPI';
+import AuthContext from '../../contexts/AuthContext';
 
 const TeamEditModal = (props) => {
     const editSchema = Yup.object().shape({
@@ -115,6 +117,9 @@ const TeamCard = ({ handleAddUpdateDeleteMember, detail }) => {
 const StartupTeamDetails = () => {
     const [teamDetails, setTeamDetails] = useState([]);
     const [modelOpen, setModelOpen] = useState(false);
+    const authContext = useContext(AuthContext);
+    const token = authContext.token;
+
     const handleAddUpdateDeleteMember = (type, id = '', name = '', role = '', linkedin = '', img = '', mimg = '') => {
         if (type === 'add') {
             if (!name && !role) {
@@ -149,9 +154,74 @@ const StartupTeamDetails = () => {
             setTeamDetails(teamDetails.filter((detail) => detail.id !== id))
         }
     }
-    const handleOpenModal = () => {
 
+    const setProfile = (team) => {
+        const newTeam  = []
+        for(let i = 0 ; i<team?.length;i++){
+            newTeam.push({
+                id:team[i].id,
+                name:team[i].name,
+                role : team[i].role,
+                linkedin : team[i].linkedin,
+                img : team[i].pic
+            })
+        }
+        setTeamDetails(newTeam);
     }
+    const fetchProfile = async () => {
+        // setLoading(true)
+        try {
+            const { data, status } = await axios.get(StartupDashboardAPI.FETCH_TEAM, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            
+            if (status === 200) {
+                const { team } = data;
+                setProfile(team);
+                // setLoading(false)
+            }
+
+        } catch (error) {
+            // setLoading(false)
+            // showToast('error', 'Error Fetching Details', 'error.gif')
+        }
+    }
+    useEffect(() => {
+        fetchProfile();
+    }, [token])
+
+    const handleSaveChanges = async () => {
+        // setLoading(true)
+        const team =[];
+        for(let i = 0; i<teamDetails.length ; i++){
+            team.push({
+                id:teamDetails[i].id,
+                name:teamDetails[i].name,
+                role : teamDetails[i].role,
+                linkedin : teamDetails[i].linkedin,
+                pic : teamDetails[i].img
+            })
+        }
+        try {
+            const { data, status } = await axios.put(StartupDashboardAPI.UPDATE_TEAM,{ team },{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (status === 200) {
+                const { message } = data;
+                fetchProfile();
+                // showToast('success', 'saved changes successfully', 'success.gif')
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
         {console.log('TEAM DETAILS : ', teamDetails)}
