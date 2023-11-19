@@ -192,7 +192,7 @@ const StartupEntityDetails = ({navigation}) => {
 
 
     const handleSaveChanges = async () => {
-        setLoading(true)
+        // setLoading(true)
         const entityDetail = {
             entityName,
             incorporationNumber,
@@ -211,7 +211,7 @@ const StartupEntityDetails = ({navigation}) => {
             if (status === 200) {
                 const { message } = data;
                 fetchProfile();
-                showToast('success', 'Details saved successfully', 'success.gif')
+                // showToast('success', 'Details saved successfully', 'success.gif')
             }
 
         } catch (error) {
@@ -300,6 +300,7 @@ const StartupEntityDetails = ({navigation}) => {
                                     name='entityName'
                                     autoCapitalize='none'
                                     autoCorrect={false}
+                                    value={entityName}
                                 />
                             </View>
                             <View style={styles.subContainer}>
@@ -310,6 +311,8 @@ const StartupEntityDetails = ({navigation}) => {
                                     name='incorporationNumber'
                                     autoCapitalize='none'
                                     autoCorrect={false}
+                                    value={incorporationNumber}
+
                                 />
                             </View>
                             <View style={styles.subContainer}>
@@ -320,6 +323,8 @@ const StartupEntityDetails = ({navigation}) => {
                                     name='entityAddress'
                                     autoCapitalize='none'
                                     autoCorrect={false}
+                                    value={entityAddress}
+
                                 />
                             </View>
                             <View style={styles.subContainer}>
@@ -330,6 +335,8 @@ const StartupEntityDetails = ({navigation}) => {
                                     name='entityPAN'
                                     autoCapitalize='none'
                                     autoCorrect={false}
+                                    value={entityPAN}
+
                                 />
                             </View>
                         </View>}
@@ -344,7 +351,7 @@ const StartupEntityDetails = ({navigation}) => {
                                 onPress={() => setModelOpen(true)}
                             />
                         </View>
-                        <View>
+                        <View style={{marginTop:10}}>
                             {directorDetails.map((detail) => {
                                 return (
                                     <DirectorCard
@@ -356,6 +363,15 @@ const StartupEntityDetails = ({navigation}) => {
                             })}
                         </View>
                     </View>
+                    <View style={styles.buttonContainer}>
+                    <View style={{ width: '48%' }}>
+                        <AppButton title={"Save Profile"} onPress={handleSaveChanges} />
+                    </View>
+                    <View style={{ width: '48%' }}>
+                        <AppButton title={"Reset"} onPress={fetchProfile} />
+                    </View>
+
+                </View>
                 </View>
             </ScrollView>
             <DirectorEditModal type='add' handleAddUpdateDeleteMember={handleAddUpdateDeleteMember} visible={modelOpen} setVisible={setModelOpen} />
@@ -445,5 +461,11 @@ const styles = StyleSheet.create({
         // position: 'absolute',
         top: 10,
         // left: 10,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop:10,
+
     },
 })

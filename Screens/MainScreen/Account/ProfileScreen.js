@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, TouchableHighlight } from 'react-native';
 import ProfilePageBox from '../../../components/utils/ProfilePageBox';
 import { AntDesign } from '@expo/vector-icons';
@@ -8,10 +8,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from 'axios';
 import { SERVER_URL } from '../../../config/env'
 import routes from '../../../routes/routes';
+import AuthContext from '../../../contexts/AuthContext';
 
 
 
 const ProfileScreen = ({ navigation }) => {
+  const authContext = useContext(AuthContext);
+  const role = authContext.role;
+  const user = authContext.user;
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -72,20 +76,24 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate("startupEntity");
     console.log("Clicked");
   };
-  const logout = async() => {
+  const investorProfile = () => {
+    navigation.navigate("investorProfile");
+    console.log("Clicked");
+  };
+  const logout = async () => {
     axios.get(`${SERVER_URL}/user/logout`)
-      .catch(error=>console.log(error));
-      try {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: "Slider" }],
-          })
-        );
-        await AsyncStorage.setItem("loggedin", "false");
-      } catch (e) {
-        console.log("login error");
-      }
+      .catch(error => console.log(error));
+    try {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "Slider" }],
+        })
+      );
+      await AsyncStorage.setItem("loggedin", "false");
+    } catch (e) {
+      console.log("login error");
+    }
 
   }
   return (
@@ -103,23 +111,37 @@ const ProfileScreen = ({ navigation }) => {
             </TouchableHighlight>
           </View>
         </View>
-        <Text style={styles.nameText}>{`${firstName} ${lastName}`}</Text>
+        <Text style={styles.nameText}>{`${user.userName}`}</Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.statLabel}>{email}</Text>
+        <Text style={styles.statLabel}>{user.email}</Text>
       </View>
-      <ProfilePageBox name="account-edit" heading="Edit Details" size={50} iconColor="black" onPress={accountEdit} />
-      <ProfilePageBox name="bank" heading="Bank Details" size={50} iconColor="black" onPress={bank} />
-      {/* <ProfilePageBox name="contacts" heading="Contact Us" size={50} iconColor="black" onPress={contacts} /> */}
-      {/* <ProfilePageBox name="security" heading="Privacy Policy" size={50} iconColor="black" onPress={security} /> */}
-      {/* <ProfilePageBox name="notebook-check-outline" heading="Terms And Conditions" size={50} iconColor="black" onPress={notebookCheckOutline} /> */}
-      {/* <ProfilePageBox name="notebook" heading="Register startup" size={50} iconColor="black" onPress={startupForm} /> */}
+
+      {console.log(role, user)}
+
+      {role === 'startup' &&
+        <View>
+          <ProfilePageBox name="account-edit" heading="Edit Profile" size={50} iconColor="black" onPress={startupProfile} />
+          <ProfilePageBox name="contacts" heading="Team details" size={50} iconColor="black" onPress={startupTeam} />
+          <ProfilePageBox name="notebook" heading="Faq details" size={50} iconColor="black" onPress={startupFaq} />
+          <ProfilePageBox name="notebook-check-outline" heading="Entity details" size={50} iconColor="black" onPress={startupEntity} />
+        </View>
+      }
+
+      {
+        role === 'investor' &&
+        <View>
+          <ProfilePageBox name="account-edit" heading="Edit Details" size={50} iconColor="black" onPress={accountEdit} />
+          <ProfilePageBox name="bank" heading="Bank Details" size={50} iconColor="black" onPress={bank} />
+          {/* <ProfilePageBox name="contacts" heading="Contact Us" size={50} iconColor="black" onPress={contacts} /> */}
+          {/* <ProfilePageBox name="security" heading="Privacy Policy" size={50} iconColor="black" onPress={security} /> */}
+          {/* <ProfilePageBox name="notebook-check-outline" heading="Terms And Conditions" size={50} iconColor="black" onPress={notebookCheckOutline} /> */}
+          {/* <ProfilePageBox name="notebook" heading="Register startup" size={50} iconColor="black" onPress={startupForm} /> */}
+          <ProfilePageBox name="logout" heading="Investor profile" size={50} iconColor="black" onPress={investorProfile} />
+        </View>
+      }
       <ProfilePageBox name="logout" heading="logout" size={50} iconColor="black" onPress={logout} />
-      <ProfilePageBox name="logout" heading="Startup Profile" size={50} iconColor="black" onPress={startupProfile} />
-      <ProfilePageBox name="logout" heading="Startup Team" size={50} iconColor="black" onPress={startupTeam} />
-      <ProfilePageBox name="logout" heading="Startup Faq" size={50} iconColor="black" onPress={startupFaq} />
-      <ProfilePageBox name="logout" heading="Startup Entity" size={50} iconColor="black" onPress={startupEntity} />
     </ScrollView>
 
   );

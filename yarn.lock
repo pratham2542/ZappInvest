@@ -7510,6 +7510,11 @@ react-native-codegen@^0.71.5:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
+react-native-datefield@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.npmjs.org/react-native-datefield/-/react-native-datefield-0.3.6.tgz"
+  integrity sha512-BPhvNrCeJBRGfW5r0UBq+nnhmmIIjXO9EMkF5bhi/onJUdn6PowU5pbgWmY77C0FL3vyk6EZOQ+9LUhiqM1sLg==
+
 react-native-dotenv@^3.4.8:
   version "3.4.8"
   resolved "https://registry.npmjs.org/react-native-dotenv/-/react-native-dotenv-3.4.8.tgz"

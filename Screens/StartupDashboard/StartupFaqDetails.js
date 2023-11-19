@@ -210,8 +210,17 @@ const StartupFaqDetails = ({ navigation }) => {
                             />
                         </View>
                     </View>
-                    <View>
-                        {faqDetails.map((detail) => {
+                    <View style={{width:'100%'}}>
+                        <View style={{flexDirection:'row', justifyContent:'center'}}>
+                            {
+                                faqDetails?.length===0 &&
+                                <Image
+                                    source={require('../../assets/NoDataFound.png')}
+                                    style={{width:300, height:300, margin:'auto'}}
+                                />
+                            }
+                        </View>
+                        {faqDetails?.map((detail) => {
                             return (
                                 <FaqCard
                                     handleAddUpdateDeleteMember={handleAddUpdateDeleteMember}
@@ -223,7 +232,7 @@ const StartupFaqDetails = ({ navigation }) => {
 
                     </View>
                 </View>
-                <View style={styles.buttonContainer}>
+                {faqDetails?.length!==0 && <View style={styles.buttonContainer}>
                     <View style={{ width: '48%' }}>
                         <AppButton title={"Save Profile"} onPress={handleSaveChanges} />
                     </View>
@@ -231,7 +240,7 @@ const StartupFaqDetails = ({ navigation }) => {
                         <AppButton title={"Reset"} onPress={fetchProfile} />
                     </View>
 
-                </View>
+                </View>}
             </ScrollView>
             <FaqEditModal type='add' handleAddUpdateDeleteMember={handleAddUpdateDeleteMember} visible={modelOpen} setVisible={setModelOpen} />
 
@@ -252,8 +261,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     subHeading: {
-        fontSize: 14,
-        fontWeight: 500,
+        fontSize: 16,
+        fontWeight: 700,
 
     },
     formContainer: {
@@ -268,6 +277,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: colors.lightGrey,
+        marginBottom:10,
     },
     cardText: {
         justifyContent: 'center',
@@ -290,7 +300,8 @@ const styles = StyleSheet.create({
     addButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal:5
     },
     buttonContainer: {
         flexDirection: 'row',

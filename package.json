@@ -39,6 +39,7 @@
     "react-native": "0.71.6",
     "react-native-animated-spinkit": "^1.4.1",
     "react-native-blob-util": "^0.17.3",
+    "react-native-datefield": "^0.3.6",
     "react-native-dotenv": "^3.4.8",
     "react-native-dropdown-listpicker": "^1.1.4",
     "react-native-dropdown-picker": "^5.4.6",

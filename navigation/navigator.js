@@ -13,6 +13,7 @@ import StartupProfileScreen from "../Screens/StartupDashboard/StartupProfileScre
 import StartupTeamDetails from "../Screens/StartupDashboard/StartupTeamDetails";
 import StartupFaqDetails from "../Screens/StartupDashboard/StartupFaqDetails";
 import StartupEntityDetails from "../Screens/StartupDashboard/StartupEntityDetails";
+import InvestorProfileScreen from "../Screens/InvestorDashboard/InvestorProfileScreen";
 const Stack = createStackNavigator();
 
 stack1 = () => {
@@ -36,6 +37,7 @@ stack1 = () => {
       <Stack.Screen name="startupTeam" component={StartupTeamDetails}/>
       <Stack.Screen name="startupFaq" component={StartupFaqDetails}/>
       <Stack.Screen name="startupEntity" component={StartupEntityDetails}/>
+      <Stack.Screen name="investorProfile" component={InvestorProfileScreen}/>
     </Stack.Navigator>
   );
 };

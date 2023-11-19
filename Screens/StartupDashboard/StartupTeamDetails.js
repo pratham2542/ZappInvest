@@ -115,7 +115,7 @@ const TeamCard = ({ handleAddUpdateDeleteMember, detail }) => {
     );
 }
 
-const StartupTeamDetails = () => {
+const StartupTeamDetails = ({navigation}) => {
     const [teamDetails, setTeamDetails] = useState([]);
     const [modelOpen, setModelOpen] = useState(false);
     const authContext = useContext(AuthContext);
@@ -245,8 +245,17 @@ const StartupTeamDetails = () => {
                             />
                         </View>
                     </View>
-                    <View>
-                        {teamDetails.map((detail) => {
+                    <View style={{ marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            {
+                                teamDetails?.length === 0 &&
+                                <Image
+                                    source={require('../../assets/NoDataFound.png')}
+                                    style={{ width: 300, height: 300, margin: 'auto' }}
+                                />
+                            }
+                        </View>
+                        {teamDetails?.map((detail) => {
                             return (
                                 <TeamCard
                                     handleAddUpdateDeleteMember={handleAddUpdateDeleteMember}
@@ -257,7 +266,7 @@ const StartupTeamDetails = () => {
                         })}
 
                     </View>
-                    <View style={styles.buttonContainer}>
+                    {teamDetails?.length !== 0 && <View style={styles.buttonContainer}>
                         <View style={{ width: '48%' }}>
                             <AppButton title={"Save Profile"} onPress={handleSaveChanges} />
                         </View>
@@ -265,7 +274,7 @@ const StartupTeamDetails = () => {
                             <AppButton title={"Reset"} onPress={fetchProfile} />
                         </View>
 
-                    </View>
+                    </View>}
                 </View>
             </ScrollView>
             <TeamEditModal type='add' handleAddUpdateDeleteMember={handleAddUpdateDeleteMember} visible={modelOpen} setVisible={setModelOpen} />

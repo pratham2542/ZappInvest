@@ -11,6 +11,7 @@ import AuthContext from "../../contexts/AuthContext";
 import axios from "axios";
 import StartupDashboardAPI from "../../API/StartupDashboardAPI";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import InterestedSectorsDropdown from "../../components/utils/InvestorSectorDropdown";
 
 
 function StartupProfileScreen({ navigation }) {
@@ -33,6 +34,7 @@ function StartupProfileScreen({ navigation }) {
     linkedin: '',
     instagram: '',
     twitter: '',
+    sectors: [],
   })
   const startupProfileSchema = Yup.object().shape({
     userName: Yup.string().trim().required(),
@@ -48,6 +50,7 @@ function StartupProfileScreen({ navigation }) {
     teamSize: Yup.string().trim(),
     stage: Yup.string().trim(),
     videoLink: Yup.array().of(Yup.string().trim()),
+    sectors: Yup.array().of(Yup.string().trim()),
   });
 
   const setProfile = (userName, email, mobile, startupName, description, tagline, status, foundedDate, location, teamSize, stage, sectors, logo, linkedin, website, twitter, instagram) => {
@@ -83,6 +86,74 @@ function StartupProfileScreen({ navigation }) {
   }, [token])
 
 
+  const handleSelectSectors = (selectedSectors) => {
+    setAllValues({ ...allValues, selectedSectors }); 
+  };
+
+  const verifyFormData = (startupName, description, stage) => {
+    if (startupName === "" || description === "" || stage === '') {
+        return {
+            valid: false,
+            message: "Required fields cannot be empty",
+        };
+    }
+    
+
+    return {
+        valid: true,
+    };
+};
+
+  const handleSaveChanges = async (values) => {
+    console.log('save change called')
+    // setLoading(true)
+    const verify = verifyFormData(values.startupName, values.description,values.stage);
+    if (!(verify.valid)) {
+      console.log(verify.message)
+        // showToast('error', verify.message, 'error.gif');
+    }
+    else {
+      console.log('move here')
+        const socialMedia = {
+            linkedin:values.linkedin,
+            twitter:values.twitter,
+            website:values.website,
+            instagram:values.instagram
+        }
+        try {
+            const { data, status } = await axios.put(StartupDashboardAPI.UPDATE_PROFILE, 
+              { 
+                userName:values.userName, 
+                email:values.email, 
+                mobile:values.mobile, 
+                startupName:values.startupName, 
+                description:values.description, 
+                foundedDate:values.foundedDate, 
+                location:values.location, 
+                teamSize:values.teamSize, 
+                stage:values.stage, 
+                // sectors: selectedSectors, 
+                logo:values.logo, 
+                socialMedia }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+
+            console.log('DATA : ', data);
+            if (status === 200) {
+                const { message } = data;
+                // showToast('success', message, 'success.gif')
+                fetchProfile();
+            }
+
+        } catch (error) {
+            // showToast('error', error.message, 'error.gif')
+        }
+    }
+
+}
+
   return (
     <ScrollView style={styles.screen}>
       <Text style={styles.backButton} onPress={() => navigation.goBack()}>
@@ -94,7 +165,7 @@ function StartupProfileScreen({ navigation }) {
         <Formik
           enableReinitialize
           initialValues={{ ...allValues }}
-          onSubmit={(values) => handleSaveProfile(values)}
+          onSubmit={(values)=>handleSaveChanges(values)}
           validationSchema={startupProfileSchema}
         >
           {({ values, handleChange, handleSubmit, errors, touched, setFieldTouched }) => (
@@ -189,13 +260,33 @@ function StartupProfileScreen({ navigation }) {
                     autoCorrect={false}
                   />
                 </View>
+                <View style={styles.subContainer}>
+                  <Text style={styles.subHeading}>Twitter</Text>
+                  <AppTextInput
+                    placeholder={"Enter instagram url"}
+                    value={values.twitter}
+                    handleChange={handleChange}
+                    touched={touched}
+                    errors={errors}
+                    onBlur={() => setFieldTouched('twitter')}
+                    name='twitter'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                  />
+                </View>
+              </BorderBox>
+              <BorderBox>
+                <InterestedSectorsDropdown
+                  selectedSectors={values.sectors} // Corrected name
+                  onSelectSector={handleSelectSectors}
+                />
               </BorderBox>
               <View style={styles.buttonContainer}>
                 <View style={{ width: '48%' }}>
-                  <AppButton title={"Save Profile"} onPress={handleSubmit} />
+                  <AppButton title={"Save Profile"} onPress={()=>handleSaveChanges(values)} />
                 </View>
                 <View style={{ width: '48%' }}>
-                  <AppButton title={"Save Profile"} onPress={handleSubmit} />
+                  <AppButton title={"Reset"} onPress={fetchProfile} />
                 </View>
 
               </View>
