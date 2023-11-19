@@ -11,6 +11,7 @@ import AppButton from '../../components/utils/AppButton';
 import axios from 'axios';
 import StartupDashboardAPI from '../../API/StartupDashboardAPI';
 import AuthContext from '../../contexts/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TeamEditModal = (props) => {
     const editSchema = Yup.object().shape({
@@ -24,7 +25,7 @@ const TeamEditModal = (props) => {
         <EditModal visible={props.visible} setVisible={props.setVisible}>
             <Formik
                 initialValues={{ id: props.id ? props.id : GenerateRandomId(10), name: props.name ? props.name : '', role: props.role ? props.role : '', img: props.img ? props.img : '', mimg: props.mimg ? props.mimg : '', linkedin: props.linkedin ? props.linkedin : '' }}
-                onSubmit={(values) => props.handleAddUpdateDeleteMember(props.type, values.id, values.name,values.role, values.linkedin, values.img, values.mimg)}
+                onSubmit={(values) => props.handleAddUpdateDeleteMember(props.type, values.id, values.name, values.role, values.linkedin, values.img, values.mimg)}
                 validationSchema={editSchema}
             >
                 {({ values, handleChange, handleSubmit, errors, touched, setFieldTouched }) => {
@@ -81,35 +82,35 @@ const TeamCard = ({ handleAddUpdateDeleteMember, detail }) => {
     const [modelOpen, setModelOpen] = useState(false);
     return (
         <>
-        <View style={styles.cardContainer}>
-            <Image
-                style={styles.cardImage}
-                source={{
-                    uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-                }}
-            />
-            <View
-                style={styles.cardText}
-            >
-                <Text>{detail.name}</Text>
-                <Text>{detail.role}</Text>
-            </View>
-            <View style={styles.cardIcons}>
-                <MaterialCommunityIcons
-                    name='account-edit'
-                    color='#5f5f5f'
-                    size={25}
-                    onPress={() => setModelOpen(true)}
+            <View style={styles.cardContainer}>
+                <Image
+                    style={styles.cardImage}
+                    source={{
+                        uri: detail.img,
+                    }}
                 />
-                <MaterialCommunityIcons
-                    name='trash-can'
-                    color='#FF7F7F'
-                    size={25}
-                    onPress={() => handleAddUpdateDeleteMember('delete', detail.id)}
-                />
+                <View
+                    style={styles.cardText}
+                >
+                    <Text>{detail.name}</Text>
+                    <Text>{detail.role}</Text>
+                </View>
+                <View style={styles.cardIcons}>
+                    <MaterialCommunityIcons
+                        name='account-edit'
+                        color='#5f5f5f'
+                        size={25}
+                        onPress={() => setModelOpen(true)}
+                    />
+                    <MaterialCommunityIcons
+                        name='trash-can'
+                        color='#FF7F7F'
+                        size={25}
+                        onPress={() => handleAddUpdateDeleteMember('delete', detail.id)}
+                    />
+                </View>
             </View>
-        </View>
-        <TeamEditModal type='update' {...detail} handleAddUpdateDeleteMember={handleAddUpdateDeleteMember} visible={modelOpen} setVisible={setModelOpen} />
+            <TeamEditModal type='update' {...detail} handleAddUpdateDeleteMember={handleAddUpdateDeleteMember} visible={modelOpen} setVisible={setModelOpen} />
         </>
     );
 }
@@ -156,14 +157,14 @@ const StartupTeamDetails = () => {
     }
 
     const setProfile = (team) => {
-        const newTeam  = []
-        for(let i = 0 ; i<team?.length;i++){
+        const newTeam = []
+        for (let i = 0; i < team?.length; i++) {
             newTeam.push({
-                id:team[i].id,
-                name:team[i].name,
-                role : team[i].role,
-                linkedin : team[i].linkedin,
-                img : team[i].pic
+                id: team[i].id,
+                name: team[i].name,
+                role: team[i].role,
+                linkedin: team[i].linkedin,
+                img: team[i].pic
             })
         }
         setTeamDetails(newTeam);
@@ -176,7 +177,7 @@ const StartupTeamDetails = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            
+
             if (status === 200) {
                 const { team } = data;
                 setProfile(team);
@@ -189,23 +190,24 @@ const StartupTeamDetails = () => {
         }
     }
     useEffect(() => {
+        console.log('TOKEN in team:', token)
         fetchProfile();
     }, [token])
 
     const handleSaveChanges = async () => {
         // setLoading(true)
-        const team =[];
-        for(let i = 0; i<teamDetails.length ; i++){
+        const team = [];
+        for (let i = 0; i < teamDetails.length; i++) {
             team.push({
-                id:teamDetails[i].id,
-                name:teamDetails[i].name,
-                role : teamDetails[i].role,
-                linkedin : teamDetails[i].linkedin,
-                pic : teamDetails[i].img
+                id: teamDetails[i].id,
+                name: teamDetails[i].name,
+                role: teamDetails[i].role,
+                linkedin: teamDetails[i].linkedin,
+                pic: teamDetails[i].img
             })
         }
         try {
-            const { data, status } = await axios.put(StartupDashboardAPI.UPDATE_TEAM,{ team },{
+            const { data, status } = await axios.put(StartupDashboardAPI.UPDATE_TEAM, { team }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -224,17 +226,24 @@ const StartupTeamDetails = () => {
 
     return (
         <>
-        {console.log('TEAM DETAILS : ', teamDetails)}
-            <ScrollView>
-                <View style={styles.screen}>
-                    <Text style={styles.heading}>Team details</Text>
-                    <View style={{ textAlign: 'right', paddingVertical: 10 }}>
-                        <MaterialCommunityIcons
-                            name='account-plus'
-                            color='#5f5f5f'
-                            size={25}
-                            onPress={() => setModelOpen(true)}
-                        />
+            {console.log('TEAM DETAILS : ', teamDetails)}
+            <ScrollView style={styles.screen}>
+                <Text style={styles.backButton} onPress={() => navigation.goBack()}>
+                    <MaterialCommunityIcons name="arrow-left" size={16} />
+                    &nbsp;Back
+                </Text>
+                <View>
+                    <Text style={[styles.heading, { textAlign: 'center', marginVertical: 20 }]}>Team details</Text>
+                    <View style={styles.addButtonContainer}>
+                        <Text style={styles.subHeading}>Edit Team</Text>
+                        <View style={{ textAlign: 'right', paddingVertical: 10 }}>
+                            <MaterialCommunityIcons
+                                name='account-plus'
+                                color='#5f5f5f'
+                                size={25}
+                                onPress={() => setModelOpen(true)}
+                            />
+                        </View>
                     </View>
                     <View>
                         {teamDetails.map((detail) => {
@@ -246,6 +255,15 @@ const StartupTeamDetails = () => {
                                 />
                             );
                         })}
+
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <View style={{ width: '48%' }}>
+                            <AppButton title={"Save Profile"} onPress={handleSaveChanges} />
+                        </View>
+                        <View style={{ width: '48%' }}>
+                            <AppButton title={"Reset"} onPress={fetchProfile} />
+                        </View>
 
                     </View>
                 </View>
@@ -269,8 +287,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     subHeading: {
-        fontSize: 14,
-        fontWeight: 500,
+        fontSize: 16,
+        fontWeight: 700,
 
     },
     formContainer: {
@@ -302,5 +320,23 @@ const styles = StyleSheet.create({
         right: 20,
         bottom: '50%',
         gap: 10
+    },
+    backButton: {
+        color: colors.primary,
+        fontSize: 15,
+        // position: 'absolute',
+        top: 10,
+        // left: 10,
+    },
+    addButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
+
     }
 })

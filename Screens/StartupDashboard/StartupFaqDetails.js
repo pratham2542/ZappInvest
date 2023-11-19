@@ -100,7 +100,7 @@ const StartupFaqDetails = ({ navigation }) => {
     const [modelOpen, setModelOpen] = useState(false);
 
     const setProfile = (faq) => {
-        setFAQDetails(faq)
+        setfaqDetails(faq)
     }
     const fetchProfile = async () => {
         // setLoading(true)
@@ -113,6 +113,8 @@ const StartupFaqDetails = ({ navigation }) => {
 
             if (status === 200) {
                 const { faq } = data;
+                console.log('DATA in FAQ: ', data),
+                    console.log("FAQ:", faq)
                 setProfile(faq);
                 // setLoading(false)
             }
@@ -124,13 +126,14 @@ const StartupFaqDetails = ({ navigation }) => {
     }
     useEffect(() => {
         fetchProfile();
+        { console.log("FAQ details 2 : ", faqDetails) }
     }, [token])
 
 
 
     const handleSaveChanges = async () => {
         // setLoading(true)
-        const faq = FAQDetails;
+        const faq = faqDetails;
         try {
             const { data, status } = await axios.put(StartupDashboardAPI.UPDATE_FAQ_DETAIL, { faq }, {
                 headers: {
@@ -188,13 +191,14 @@ const StartupFaqDetails = ({ navigation }) => {
     }
     return (
         <>
+            {console.log("FAQ details : ", faqDetails)}
             <ScrollView style={styles.screen}>
                 <Text style={styles.backButton} onPress={() => navigation.goBack()}>
                     <MaterialCommunityIcons name="arrow-left" size={16} />
                     &nbsp;Back
                 </Text>
                 <View>
-                    <Text style={[styles.heading, {textAlign:'center', marginVertical:20}]}>FAQ Detail</Text>
+                    <Text style={[styles.heading, { textAlign: 'center', marginVertical: 20 }]}>FAQ Detail</Text>
                     <View style={styles.addButtonContainer}>
                         <Text style={styles.subHeading}>Edit FAQ</Text>
                         <View style={{ textAlign: 'right', paddingVertical: 10 }}>
@@ -218,6 +222,15 @@ const StartupFaqDetails = ({ navigation }) => {
                         })}
 
                     </View>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <View style={{ width: '48%' }}>
+                        <AppButton title={"Save Profile"} onPress={handleSaveChanges} />
+                    </View>
+                    <View style={{ width: '48%' }}>
+                        <AppButton title={"Reset"} onPress={fetchProfile} />
+                    </View>
+
                 </View>
             </ScrollView>
             <FaqEditModal type='add' handleAddUpdateDeleteMember={handleAddUpdateDeleteMember} visible={modelOpen} setVisible={setModelOpen} />
@@ -274,9 +287,15 @@ const styles = StyleSheet.create({
         top: 10,
         // left: 10,
     },
-    addButtonContainer:{
+    addButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop:10,
+
+    }
 })

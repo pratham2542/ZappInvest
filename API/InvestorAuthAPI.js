@@ -1,12 +1,11 @@
-const server = 'http://172.22.31.142:8080'
-
+import { SERVER_URL } from "../config/env"
 export default {
-    INVESTOR_GOOGLE:`${server}/users/google`,
-    INVESTOR_LOGIN:`${server}/users/login`,
-    INVESTOR_SIGNUP:`${server}/users/signup`,
-    INVESTOR_LOGOUT: `${server}/users/logout`,
-    // STARTUP_LOGIN:`${server}/investorUser/login`,
-    // STARTUP_SIGNUP:`${server}/investorUser/login`,
-    AUTHENTICATION:`${server}/users/`,
+    INVESTOR_GOOGLE:`${SERVER_URL}/users/google`,
+    INVESTOR_LOGIN:`${SERVER_URL}/users/login`,
+    INVESTOR_SIGNUP:`${SERVER_URL}/users/signup`,
+    INVESTOR_LOGOUT: `${SERVER_URL}/users/logout`,
+    // STARTUP_LOGIN:`${SERVER_URL}/investorUser/login`,
+    // STARTUP_SIGNUP:`${SERVER_URL}/investorUser/login`,
+    AUTHENTICATION:`${SERVER_URL}/users/`,
     
 }

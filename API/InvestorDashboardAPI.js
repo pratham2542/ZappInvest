@@ -1,15 +1,14 @@
-const server = 'http://localhost:8080'
-
+import { SERVER_URL } from "../config/env"
 export default{
-    FETCH_DASHBOARD:`${process.env.REACT_APP_SERVER}/investor/dashboard`,
+    FETCH_DASHBOARD:`${SERVER_URL}/investor/dashboard`,
 
-    FETCH_PORTFOLIO:`${process.env.REACT_APP_SERVER}/investor/portfolio`,
+    FETCH_PORTFOLIO:`${SERVER_URL}/investor/portfolio`,
 
-    FETCH_PROFILE:`${process.env.REACT_APP_SERVER}/investor/profile`,
-    UPDATE_PROFILE:`${process.env.REACT_APP_SERVER}/investor/profile`,
+    FETCH_PROFILE:`${SERVER_URL}/investor/profile`,
+    UPDATE_PROFILE:`${SERVER_URL}/investor/profile`,
 
-    CHANGE_PASSWORD:`${process.env.REACT_APP_SERVER}/investor/change-password`,
+    CHANGE_PASSWORD:`${SERVER_URL}/investor/change-password`,
 
-    FETCH_FAVOURITE:`${process.env.REACT_APP_SERVER}/investor/favourite-startups`,
+    FETCH_FAVOURITE:`${SERVER_URL}/investor/favourite-startups`,
 
 }

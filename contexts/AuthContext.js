@@ -1,16 +1,16 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-// import InvestorAuthAPI from '../API/InvestorAuthAPI';
-
+import InvestorAuthAPI from '../API/InvestorAuthAPI';
+import {Buffer} from 'buffer'
 const AuthContext = createContext({
   isAuthenticated: false,
   isLoggedIn: false,
   role: '',
   user: {},
   token: '',
-  login: (token, data) => {},
-  logout: () => {},
+  login: (token, data) => { },
+  logout: () => { },
   loading: false,
 });
 
@@ -24,12 +24,13 @@ export const AuthContextProvider = (props) => {
 
   const login = async (token, data) => {
     try {
-      console.log('TOKEN in authcontext : ', token);
-      console.log('DATA in authContext : ', data);
+      // console.log('TOKEN in authcontext : ', token);
+      // console.log('DATA in authContext : ', data);
 
 
       await AsyncStorage.setItem('jwtToken', token);
       await AsyncStorage.setItem('user', JSON.stringify(data));
+
       setIsAuthenticated(true);
       setIsLoggedIn(true);
       setToken(token);
@@ -41,7 +42,7 @@ export const AuthContextProvider = (props) => {
       });
       const tokenParts = token?.split('.');
       if (tokenParts) {
-        let decodedPayload = atob(tokenParts[1]);
+        let decodedPayload = Buffer.from(tokenParts[1], 'base64').toString('ascii');
         decodedPayload = JSON.parse(decodedPayload);
         const { role } = decodedPayload.id;
         setRole(role);
@@ -81,24 +82,23 @@ export const AuthContextProvider = (props) => {
     };
 
     const verifyToken = async () => {
-      // try {
-      //   const token = await AsyncStorage.getItem('jwtToken');
-      //   if (token) {
-      //     const { data } = await axios.get(InvestorAuthAPI.AUTHENTICATION, {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //       },
-      //     });
+      try {
+        const token = await AsyncStorage.getItem('jwtToken');
+        if (token) {
+          const { data } = await axios.get(InvestorAuthAPI.AUTHENTICATION, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-      //     if (data && data.status === 400) {
-      //       await logout();
-      //     }
-      //   }
-      // } catch (error) {
-      //   console.error('Error verifying token:', error);
-      // }
+          if (data && data.status === 400) {
+            await logout();
+          }
+        }
+      } catch (error) {
+        console.error('Error verifying token:', error);
+      }
     };
-
     loadUserData();
     verifyToken();
   }, []);

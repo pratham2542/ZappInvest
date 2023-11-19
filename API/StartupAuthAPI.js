@@ -1,6 +1,5 @@
-const server = 'http://localhost:8080'
-
+import { SERVER_URL } from "../config/env"
 export default {
-    STARTUP_LOGIN:`${process.env.REACT_APP_SERVER}/startupauth/login`,
+    STARTUP_LOGIN:`${SERVER_URL}/startupauth/login`,
     
 }

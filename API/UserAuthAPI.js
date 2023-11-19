@@ -1,5 +1,6 @@
+import { SERVER_URL } from "../config/env"
 export default {
-    FORGOT_PASSWORD:`${process.env.REACT_APP_SERVER}/users/forgot-password`,
-    RESET_PASSWORD:`${process.env.REACT_APP_SERVER}/users/reset-password`,
+    FORGOT_PASSWORD:`${SERVER_URL}/users/forgot-password`,
+    RESET_PASSWORD:`${SERVER_URL}/users/reset-password`,
     
 }

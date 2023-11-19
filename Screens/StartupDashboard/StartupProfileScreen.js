@@ -10,6 +10,7 @@ import EditModal from "../../components/utils/EditModal";
 import AuthContext from "../../contexts/AuthContext";
 import axios from "axios";
 import StartupDashboardAPI from "../../API/StartupDashboardAPI";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 function StartupProfileScreen({ navigation }) {
@@ -51,7 +52,12 @@ function StartupProfileScreen({ navigation }) {
 
   const setProfile = (userName, email, mobile, startupName, description, tagline, status, foundedDate, location, teamSize, stage, sectors, logo, linkedin, website, twitter, instagram) => {
     setAllValues({
-      userName,email,mobile,startupName,description,tagline,foundedDate,location,teamSize,stage,sectors, logo, linkedin, website, twitter, instagram
+      userName,
+      email,
+      mobile,
+      startupName,
+      description,
+      tagline, foundedDate, location, teamSize, stage, sectors, logo, linkedin, website, twitter, instagram
     })
   }
   const fetchProfile = async () => {
@@ -62,7 +68,6 @@ function StartupProfileScreen({ navigation }) {
           Authorization: `Bearer ${token}`,
         },
       });
-
       if (status === 200) {
         const { userName, email, mobile, startupName, description, tagline, status, foundedDate, location, teamSize, stage, sectors, logo, socialMedia } = data;
         setProfile(userName, email, mobile, startupName, description, tagline, status, foundedDate, location, teamSize, stage, sectors, logo, socialMedia.linkedin, socialMedia.website, socialMedia.twitter, socialMedia.instagram);
@@ -77,13 +82,18 @@ function StartupProfileScreen({ navigation }) {
     fetchProfile();
   }, [token])
 
-  
+
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <Text style={styles.heading}>Startup Profile</Text>
+    <ScrollView style={styles.screen}>
+      <Text style={styles.backButton} onPress={() => navigation.goBack()}>
+        <MaterialCommunityIcons name="arrow-left" size={16} />
+        &nbsp;Back
+      </Text>
+      <View style={{ paddingHorizontal: 2 }}>
+        <Text style={[styles.heading, { textAlign: 'center', marginVertical: 20 }]}>Startup Profile</Text>
         <Formik
-          initialValues={allValues}
+          enableReinitialize
+          initialValues={{ ...allValues }}
           onSubmit={(values) => handleSaveProfile(values)}
           validationSchema={startupProfileSchema}
         >
@@ -180,7 +190,15 @@ function StartupProfileScreen({ navigation }) {
                   />
                 </View>
               </BorderBox>
-              <AppButton title={"Save Profile"} onPress={handleSubmit} />
+              <View style={styles.buttonContainer}>
+                <View style={{ width: '48%' }}>
+                  <AppButton title={"Save Profile"} onPress={handleSubmit} />
+                </View>
+                <View style={{ width: '48%' }}>
+                  <AppButton title={"Save Profile"} onPress={handleSubmit} />
+                </View>
+
+              </View>
             </View>
           )}
         </Formik>
@@ -210,6 +228,18 @@ const styles = StyleSheet.create({
   subContainer: {
     marginTop: 10,
   },
+  backButton: {
+    color: colors.primary,
+    fontSize: 15,
+    // position: 'absolute',
+    top: 10,
+    // left: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+
+  }
 });
 
 export default StartupProfileScreen;

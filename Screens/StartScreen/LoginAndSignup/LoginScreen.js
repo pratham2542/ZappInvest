@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import { View, StyleSheet, Text, Pressable, TouchableHighlight, Linking } from "react-native";
 import colors from "../../../config/colors";
 import AppButton from "../../../components/utils/AppButton"
 import GoogleCard from "../../../components/OtherComponents/Cards/GoogleCard";
@@ -80,6 +80,11 @@ function LoginScreen({ navigation, props }) {
     }
 };
 
+const handleGoogleAuth=()=>{
+  Linking.openURL(InvestorAuthAPI.INVESTOR_GOOGLE)
+    .catch((err) => console.error('Error opening URL: ', err));
+}
+
 // old login handler
 
   // const handleLogin = async ({ email, password }) => {
@@ -128,10 +133,12 @@ function LoginScreen({ navigation, props }) {
       <View style={{ alignItems: "center" }}>
         <Text style={styles.heading}>Log in</Text>
       </View>
-      {/* <View style={{ marginHorizontal: 10 }}>
+      <View style={{ marginHorizontal: 10 }}>
+        <TouchableHighlight onPress={handleGoogleAuth}>
         <GoogleCard name={"google"} />
+        </TouchableHighlight>
       </View>
-      <TextLineSeperator text={"OR LOG IN WITH EMAIL"} /> */}
+      <TextLineSeperator text={"OR LOG IN WITH EMAIL"} />
 
       <Formik
         initialValues={{ email: '', password: '' }}
